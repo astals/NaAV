@@ -1,4 +1,4 @@
-# NaAV - Non an AntiVirus
+# NaAV - Not an AntiVirus
 **TLDR;** NaAV makes the system simulate it's a malware analysis sandbox.
 
 ## Why use NaAV?
