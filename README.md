@@ -1,6 +1,8 @@
 # NaAV - Not an AntiVirus
 **TLDR;** NaAV makes the system simulate it's a malware analysis sandbox.
 
+**Stable Release:** None, still on developpment
+
 ## Why use NaAV?
 Most advanced malware binaries use sandbox detection to avoid being analyzed by enterprise antimalware solutions or reversing teams.
 
