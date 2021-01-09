@@ -1,5 +1,5 @@
 # <ins>NaAV - Not an AntiVirus</ins>
-**TLDR;** NaAV makes the system simulate it's a malware analysis sandbox.
+**TLDR;** NaAV makes the system simulate it's an malware analysis sandbox.
 
 **Stable Release:** None, still on development
 
@@ -18,21 +18,21 @@ naav.exe -c -> Check, this action checks your system in order to know how many V
 naav.exe -h -> Help
 
 ## <ins>Functionalities</ins>
-### VMware 
+### VMware Emulation
 |Functionality | Status | Version |
 |:-------------|:-------------:|:-------------:|
 | Fake C:\\WINDOWS\\system32\\drivers\\vmhgfs.sys driver | Implemented | 0.1 |
 | Fake C:\\WINDOWS\\system32\\drivers\\vmmouse.sys driver | Implemented | 0.1 |
 | Fake guest Network interface | WIP | 0.1 |
 
-### Virtualbox 
+### Virtualbox Emulation
 |Functionality | Status | Version |
 |:-------------|:-------------:|:-------------:|
 | Fake drivers | WIP | 0.1 |
 | Fake guest Network interface | WIP | 0.1 |
 
-### Analysis tools 
+### Analysis tools Emulation
 |Functionality | Status | Version |
 |:-------------|:-------------:|:-------------:|
-| Fake processes | WIP | 0.1 |
+| Fake processes (defined in config file) | WIP | 0.1 |
 
