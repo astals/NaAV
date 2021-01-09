@@ -10,8 +10,11 @@ NaAV configures the target system to make the malware think it has landed on an 
 
 ## <ins>Basic usage</ins>
 naav.exe -i [configFile] -> Install, this acction requires a configuration file, you can see an example on https://github.com/astals/NaAV
+
 naav.exe -u -> Uninstall
+
 naav.exe -c -> Check, this action checks your system in order to know how many Virtual Machine checks it passes
+
 naav.exe -h -> Help
 
 ## <ins>Functionalities</ins>
