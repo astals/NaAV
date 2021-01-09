@@ -31,7 +31,7 @@ naav.exe -h -> Help
 | Fake drivers | WIP | 0.1 |
 | Fake guest Network interface | WIP | 0.1 |
 
-### Analysis tools Emulation
+### Analysis Tools Emulation
 |Functionality | Status | Version |
 |:-------------|:-------------:|:-------------:|
 | Fake processes (defined in config file) | WIP | 0.1 |
