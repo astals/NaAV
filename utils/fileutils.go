@@ -9,14 +9,14 @@ import (
 //driverVerboseName= strings.Split(key, "\\")[len(strings.Split(key, "\\"))-1]
 func SafeCopy(origin string, destination string, printPreapend string) error {
 	exists, err := FileExists(origin)
-	if err != nil {
+	/*if err != nil {
 		fmt.Printf("%s [!] ER-FU001 Skyping file %s, %s \n", printPreapend, origin, err)
 		return err
 	}
 	if !exists {
 		fmt.Printf("%s ER-FU002 Skyping file %s, file not found \n", printPreapend, origin)
 		return err
-	}
+	}*/
 	exists, err = FileExists(destination)
 	if err != nil && !os.IsNotExist(err) {
 		fmt.Printf("%s [!] ER-FU003 Skyping file %s, %s \n", printPreapend, destination, err)
@@ -46,4 +46,9 @@ func FileExists(filename string) (bool, error) {
 		return false, err
 	}
 	return !info.IsDir(), nil
+}
+
+func ReadFile(file string) ([]byte, error) {
+	bytesRead, err := ioutil.ReadFile(file)
+	return bytesRead, err
 }

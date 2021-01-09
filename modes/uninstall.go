@@ -1,3 +1,9 @@
 package modes
 
-func Uninstall() {}
+import (
+	"../modules/VMware"
+)
+
+func Uninstall() {
+	VMware.UninstallVMwareDrivers()
+}
