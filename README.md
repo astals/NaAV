@@ -28,6 +28,7 @@ naav.exe -h -> Help
 ### Virtualbox Emulation
 |Functionality | Status | Version |
 |:-------------|:-------------:|:-------------:|
+|Fake VirtualBox Guest Additions Files (C:\\Program Files\\Oracle\\VirtualBox Guest Additions)| Implemented | 0.1 |
 | Fake drivers | WIP | 0.1 |
 | Fake guest Network interface | WIP | 0.1 |
 

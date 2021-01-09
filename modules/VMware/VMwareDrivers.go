@@ -2,7 +2,6 @@ package VMware
 
 import (
 	"fmt"
-	"os"
 
 	"../../utils"
 )
@@ -28,18 +27,8 @@ func UninstallVMwareDrivers() {
 	fmt.Printf("Removing VMware host drivers on system:\n")
 	okOperations := 0
 	for destination, _ := range files {
-		data, err := utils.ReadFile(destination)
-		if err == nil && string(data) == "NaAV" {
-			err := os.Remove(destination)
-			if err == nil {
-				okOperations++
-			} else {
-				fmt.Printf("\t [!] ER-VMW001 Error removing file %s, %s\n", destination, err)
-			}
-		} else if err != nil {
-			fmt.Printf("\t [!] ER-VMW002 Error removing file %s, %s\n", destination, err)
-		} else {
-			fmt.Printf("\t Skipping file %s, not NaAV file\n", destination)
+		success, err := utils.DeleteIfIsNaAVFile(destination, "\t")
+		if success && err == nil {
 			okOperations++
 		}
 	}
@@ -47,6 +36,7 @@ func UninstallVMwareDrivers() {
 }
 
 func CheckVMwareDrivers() {
+	fmt.Printf("Checking  VMware host drivers on system:\n")
 	okOperations := 0
 	for destination, _ := range files {
 		res, _ := utils.FileExists(destination)
