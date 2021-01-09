@@ -1,5 +1,5 @@
 # <ins>NaAV - Not an AntiVirus</ins>
-**TLDR;** NaAV makes the system simulate it's an malware analysis sandbox.
+**TLDR;** NaAV makes the system simulate it's a malware analysis sandbox.
 
 **Stable Release:** None, still on development
 
