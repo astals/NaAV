@@ -21,15 +21,16 @@ The Check option (naav.exe -c) alows you to detect in seconds if you have landed
 ## <ins>Basic usage</ins>
 naav.exe --install [configFile] -> Install, this acction requires a configuration file, you can see an example on https://github.com/astals/NaAV/blob/main/config.json
 
-naav.exe --uninstall -> Uninstall
+naav.exe --uninstall -> Uninstall, to uninstall is recommended running 'C:\\Program Files (x86)\\NaAV\\naav.exe -u' instead of using the downloaded file
 
-naav.exe --update -> Uninstall
+naav.exe --update -> Update
 
 naav.exe --check -> Check, this action checks your system in order to know how many Virtual Machine checks it passes
 
-naav.exe -v/--version -> Version
+naav.exe -v/--version -> Versions (installed and current binary)
 
 naav.exe -h/--help -> Help
+
 
 ## <ins>Functionalities</ins>
 ### VMware Emulation

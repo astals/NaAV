@@ -56,11 +56,11 @@ func main() {
 
 func DisplayHelp() {
 	fmt.Printf("---- NaAV %s ----\n", NaAVVersion)
-	fmt.Printf("naav.exe -i [configFile] -> Install, this action requires a configuration file, you can see an example on https://github.com/astals/NaAV\n")
-	fmt.Printf("naav.exe -u -> Uninstall, To uninstall run C:\\%ProgramFiles%\\NaAV\\naav.exe -u\n")
-	fmt.Printf("naav.exe -c -> Check, this action checks your system in order to know how many Virtual Machine checks it passes\n")
-	fmt.Printf("naav.exe -v -> Versions (installed and current binary) \n")
-	fmt.Printf("naav.exe -h -> Help\n")
+	fmt.Printf("naav.exe --install [configFile] -> Install, this action requires a configuration file, you can see an example on https://github.com/astals/NaAV/blob/main/config.json\n")
+	fmt.Printf("naav.exe --uninstall -> Uninstall, to uninstall is recommended running 'C:\\Program Files (x86)\\NaAV\\naav.exe -u' instead of using the downloaded file\n")
+	fmt.Printf("naav.exe --check -> Check, this action checks your system in order to know how many Virtual Machine checks it passes\n")
+	fmt.Printf("naav.exe -v/--version -> Versions (installed and current binary) \n")
+	fmt.Printf("naav.exe -h/--help -> Help\n")
 
 }
 
