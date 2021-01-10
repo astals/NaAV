@@ -4,9 +4,14 @@
 **Stable Release:** None, still on development
 
 ## <ins>Why use NaAV as a defender?</ins>
+
+### Example Use case 1
 Most advanced malware binaries use sandbox detection to avoid being analyzed by enterprise antimalware solutions or reversing teams.
 
-NaAV configures the target system to make the malware think it has landed on an analysis system and in most cases induce to delete itself, stop the execution, don't download stage 2 binaries/modules, etc. 
+NaAV configures the target system to make the malware think it has landed on an analysis system and in most cases induce to delete itself, stop the execution, don't download stage 2 binaries/modules, etc.
+
+### Example Use case 2
+The Check option (naav.exe -c) alows you to detect in seconds if your sandboxes or honeypods can be easily detected by binaries anti-VM checks.
 
 ## <ins>Why use NaAV as an attacker?</ins>
 
