@@ -1,6 +1,6 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/astals/NaAv/blob/main/logo.png" />
-
+<img src="https://raw.githubusercontent.com/astals/NaAv/main/logo.png" />
+          
 **TLDR;** NaAV makes the system simulate it's a malware analysis sandbox.
 
 **Stable Release:** None, still on development
