@@ -15,6 +15,8 @@ naav.exe -u -> Uninstall
 
 naav.exe -c -> Check, this action checks your system in order to know how many Virtual Machine checks it passes
 
+naav.exe -v -> Version
+
 naav.exe -h -> Help
 
 ## <ins>Functionalities</ins>
@@ -35,5 +37,5 @@ naav.exe -h -> Help
 ### Analysis Tools Emulation
 |Functionality | Status | Version |
 |:-------------|:-------------:|:-------------:|
-| Fake processes (defined in config file) | WIP | 0.1 |
+| Fake processes (~40, defined in config file) | WIP | 0.1 |
 

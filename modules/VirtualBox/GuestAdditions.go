@@ -2,7 +2,6 @@ package VirtualBox
 
 import (
 	"fmt"
-	"os"
 
 	"../../utils"
 )
