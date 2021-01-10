@@ -27,7 +27,13 @@ type Configuration struct {
 }
 
 func Install(ConfigFile string) {
+	ConfigFile, err := utils.FindAbsolutePath(ConfigFile)
+	if err != nil {
+		fmt.Printf("[!] ER-IN001 Unable to find config file")
+		os.Exit(2)
+	}
 	Config := ReadConfigFile(ConfigFile)
+	cloneInstallFiles(ConfigFile)
 	if Config.WMware.FakeDrivers {
 		VMware.InstallVMwareDrivers()
 	}
@@ -37,37 +43,30 @@ func Install(ConfigFile string) {
 }
 
 func ReadConfigFile(ConfigFile string) Configuration {
-	var bytesRead []byte
-	var err error
-	/* read file */
-	res, _ := utils.FileExists(ConfigFile)
-	if res == true {
-		bytesRead, err = utils.ReadFile(ConfigFile)
-		if err != nil {
-			fmt.Printf("Unable to read config file, %s", err)
-			os.Exit(5)
-		}
-	} else {
-		cwd, _ := os.Getwd()
-		ConfigFile = cwd + "\\" + ConfigFile
-		res, _ = utils.FileExists(ConfigFile)
-		if res == true {
-			bytesRead, err = utils.ReadFile(ConfigFile)
-			if err != nil {
-				fmt.Printf("Unable to read config file, %s", err)
-				os.Exit(5)
-			}
-		} else {
-			fmt.Printf("Unable to read config file, %s", err)
-			os.Exit(2)
-		}
+	bytesRead, err := utils.ReadFile(ConfigFile)
+	if err != nil {
+		fmt.Printf("[!] ER-IN002 Unable to read config file, %s", err)
+		os.Exit(5)
 	}
-	/* unmarshall json */
 	var Config Configuration
 	err = json.Unmarshal(bytesRead, &Config)
 	if err != nil {
-		fmt.Printf("Unable to read config file, %s", err)
+		fmt.Printf("[!] ER-IN003 Unable to read config file, %s", err)
 		os.Exit(11)
 	}
 	return Config
+}
+
+func cloneInstallFiles(ConfigFile string) {
+	cwd, _ := os.Getwd()
+	utils.CreateFoldersPath("C:\\Program Files (x86)\\NaAV")
+	args := os.Args
+	err := utils.CopyFile(cwd+"\\"+args[1], "C:\\Program Files (x86)\\NaAV\\naav.exe")
+	if err != nil {
+		fmt.Printf("\t [!] ER-IN004 Unable to save %s , %s", "C:\\Program Files (x86)\\NaAV\\naav.exe", err)
+	}
+	err = utils.CopyFile(ConfigFile, "C:\\Program Files (x86)\\NaAV\\config.json")
+	if err != nil {
+		fmt.Printf("\t [!] ER-IN004 Unable to save %s , %s", "C:\\Program Files (x86)\\NaAV\\config.json", err)
+	}
 }

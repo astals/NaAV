@@ -13,11 +13,11 @@ var NaAVVersion = "0.1"
 func main() {
 	// TODO: create uninstall $het (control panel)
 	args := os.Args
-	if len(args) == 1 || args[1] == "-h" {
+	if len(args) == 1 || args[1] == "-h" || args[1] == "--help" {
 		DisplayHelp()
 		return
 	}
-	if args[1] == "-v" {
+	if args[1] == "-v" || args[1] == "--version" {
 		fmt.Printf("NaAV %s\n", NaAVVersion)
 		return
 	}
@@ -34,13 +34,13 @@ func main() {
 			return
 		}*/
 	}
-	if args[1] == "-c" {
+	if args[1] == "--check" {
 		modes.Check()
 	}
-	if args[1] == "-u" {
+	if args[1] == "--uninstall" {
 		modes.Uninstall()
 	}
-	if args[1] == "-i" {
+	if args[1] == "--install" {
 		if len(args) < 3 {
 			fmt.Printf("This action requires a configuration file\n")
 			DisplayHelp()
@@ -48,14 +48,18 @@ func main() {
 		}
 		modes.Install(args[2])
 	}
+	if args[1] != "-v" && args[1] != "--version" && args[1] != "-h" && args[1] != "--help" && args[1] != "--check" && args[1] != "--uninstall" && args[1] != "--install" {
+		fmt.Printf("Invalid option \n")
+		DisplayHelp()
+	}
 }
 
 func DisplayHelp() {
 	fmt.Printf("---- NaAV %s ----\n", NaAVVersion)
 	fmt.Printf("naav.exe -i [configFile] -> Install, this action requires a configuration file, you can see an example on https://github.com/astals/NaAV\n")
-	fmt.Printf("naav.exe -u -> Uninstall\n")
+	fmt.Printf("naav.exe -u -> Uninstall, To uninstall run C:\\%ProgramFiles%\\NaAV\\naav.exe -u\n")
 	fmt.Printf("naav.exe -c -> Check, this action checks your system in order to know how many Virtual Machine checks it passes\n")
-	fmt.Printf("naav.exe -v -> Version \n") //installed V?
+	fmt.Printf("naav.exe -v -> Versions (installed and current binary) \n")
 	fmt.Printf("naav.exe -h -> Help\n")
 
 }

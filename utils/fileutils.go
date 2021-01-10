@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -81,4 +82,19 @@ func DeleteIfIsNaAVFile(file string, printPrepend string) (bool, error) {
 
 func CreateFoldersPath(path string) error {
 	return os.MkdirAll(path, os.ModePerm)
+}
+
+func FindAbsolutePath(file string) (string, error) {
+	res, _ := FileExists(file)
+	if res == true {
+		return file, nil
+	} else {
+		cwd, _ := os.Getwd()
+		file = cwd + "\\" + file
+		res, _ = FileExists(file)
+		if res == true {
+			return file, nil
+		}
+	}
+	return "", errors.New("file not found")
 }
