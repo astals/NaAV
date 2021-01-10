@@ -3,13 +3,17 @@
 
 **Stable Release:** None, still on development
 
-## <ins>Why use NaAV?</ins>
+## <ins>Why use NaAV as a defender?</ins>
 Most advanced malware binaries use sandbox detection to avoid being analyzed by enterprise antimalware solutions or reversing teams.
 
 NaAV configures the target system to make the malware think it has landed on an analysis system and in most cases induce to delete itself, stop the execution, don't download stage 2 binaries/modules, etc. 
 
+## <ins>Why use NaAV as an attacker?</ins>
+
+The Check option (naav.exe -c) alows you to detect in seconds if you have landed on a poorly configured Honeypot.
+
 ## <ins>Basic usage</ins>
-naav.exe -i [configFile] -> Install, this acction requires a configuration file, you can see an example on https://github.com/astals/NaAV
+naav.exe -i [configFile] -> Install, this acction requires a configuration file, you can see an example on https://github.com/astals/NaAV/blob/main/config.json
 
 naav.exe -u -> Uninstall
 
