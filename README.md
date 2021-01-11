@@ -63,8 +63,8 @@ naav.exe -h/--help -> Help
 | Fake Guest Registry Keys | WIP | 0.1 | |
 
 ### Analysis Tools Emulation
-|Functionality | Status | Version | Details|:-------------|
-|:-------------|:-------------:|:-------------:|
+|Functionality | Status | Version | Details|
+|:-------------|:-------------:|:-------------:|:-------------|
 | Fake Processes | WIP | 0.1 | ~40, defined in config file |
 
 ## <ins>Functionalities only availabe on Check</ins>
