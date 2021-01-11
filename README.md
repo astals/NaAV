@@ -57,7 +57,7 @@ naav.exe -h/--help -> Help
 |Functionality | Status | Version | Details|
 |:-------------:|:-------------:|:-------------:|:-------------|
 | Fake Guest Drivers | WIP | 0.1 | |
-| Fake VirtualBox Guest Additions Files| Implemented | 0.1 | C:\\Program Files\\Oracle\\VirtualBox Guest Additions\\*, C:\\Windows\\System32\\VBox*  |
+| Fake VirtualBox Guest Additions Files| Implemented | 0.1 | C:\\Program Files\\Oracle\\VirtualBox Guest Additions\\* , C:\\Windows\\System32\\VBox*  |
 | Fake Guest Network Interfaces | WIP | 0.1 | |
 | Fake Guest Processes & Services| WIP | 0.1 | Defined in config file |
 | Fake Guest Registry Keys | WIP | 0.1 | |
