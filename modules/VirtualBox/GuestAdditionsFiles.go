@@ -6,7 +6,7 @@ import (
 	"../../utils"
 )
 
-var files = map[string]string{
+var GuestAdditionsFiles = map[string]string{
 	"C:\\Windows\\System32\\VBoxControl.exe":                                                          "resources\\dummy",
 	"C:\\Windows\\System32\\VBoxDispD3D.dll":                                                          "resources\\dummy",
 	"C:\\Windows\\System32\\VBoxGL.dll":                                                               "resources\\dummy",
@@ -54,19 +54,19 @@ var files = map[string]string{
 func InstallVirtualBoxGuestAdditionsFiles() {
 	fmt.Printf("Copying VirtualBox Guest Additions files on system:\n")
 	okOperations := 0
-	for destination, origin := range files {
+	for destination, origin := range GuestAdditionsFiles {
 		err := utils.SafeCopy(origin, destination, "\t")
 		if err == nil {
 			okOperations++
 		}
 	}
-	fmt.Printf("\t [i] Performed %d of %d operations\n", okOperations, len(files))
+	fmt.Printf("\t [i] Performed %d of %d operations\n", okOperations, len(GuestAdditionsFiles))
 }
 
 func UninstallVirtualBoxGuestAdditionsFiles() {
 	fmt.Printf("Removing VirtualBox Guest Additions files on system:\n")
 	okOperations := 0
-	for destination, _ := range files {
+	for destination, _ := range GuestAdditionsFiles {
 		res, _ := utils.FileExists(destination)
 		if res {
 			success, err := utils.DeleteIfIsNaAVFile(destination, "\t")
@@ -77,17 +77,17 @@ func UninstallVirtualBoxGuestAdditionsFiles() {
 			okOperations++
 		}
 	}
-	fmt.Printf("\t [i] Performed %d of %d operations\n", okOperations, len(files))
+	fmt.Printf("\t [i] Performed %d of %d operations\n", okOperations, len(GuestAdditionsFiles))
 }
 
 func CheckVirtualBoxGuestAdditionsFiles() {
 	fmt.Printf("Checking VirtualBox Guest Additions files on system:\n")
 	okOperations := 0
-	for destination, _ := range files {
+	for destination, _ := range GuestAdditionsFiles {
 		res, _ := utils.FileExists(destination)
 		if res {
 			okOperations++
 		}
 	}
-	fmt.Printf("\t [i] Found %d of %d files\n", okOperations, len(files))
+	fmt.Printf("\t [i] Found %d of %d GuestAdditionsFiles\n", okOperations, len(GuestAdditionsFiles))
 }

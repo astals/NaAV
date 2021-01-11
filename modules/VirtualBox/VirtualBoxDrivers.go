@@ -1,4 +1,4 @@
-package VMware
+package VirtualBox
 
 import (
 	"fmt"
@@ -7,17 +7,14 @@ import (
 )
 
 var driverfiles = map[string]string{
-	"C:\\WINDOWS\\system32\\drivers\\vmrawdsk.sys":      "resources\\dummy",
-	"C:\\WINDOWS\\system32\\drivers\\vmmemctl.sys":      "resources\\dummy",
-	"C:\\WINDOWS\\system32\\drivers\\vmusbmouse.sys":    "resources\\dummy",
-	"C:\\WINDOWS\\system32\\drivers\\vm3dmp-debug.sys":  "resources\\dummy",
-	"C:\\WINDOWS\\system32\\drivers\\vm3dmp-stats.sys":  "resources\\dummy",
-	"C:\\WINDOWS\\system32\\drivers\\vm3dmp.sys":        "resources\\dummy",
-	"C:\\WINDOWS\\system32\\drivers\\vm3dmp_loader.sys": "resources\\dummy",
+	"C:\\WINDOWS\\system32\\drivers\\VBoxGuest.sys": "resources\\dummy",
+	"C:\\WINDOWS\\system32\\drivers\\VBoxMouse.sys": "resources\\dummy",
+	"C:\\WINDOWS\\system32\\drivers\\VBoxSF.sys":    "resources\\dummy",
+	"C:\\WINDOWS\\system32\\drivers\\VBoxWddm.sys":  "resources\\dummy",
 }
 
-func InstallVMwareDrivers() {
-	fmt.Printf("Copying VMware host drivers on system:\n")
+func InstallVirtualBoxDrivers() {
+	fmt.Printf("Copying VirtualBox host drivers on system:\n")
 	okOperations := 0
 	for destination, origin := range driverfiles {
 		err := utils.SafeCopy(origin, destination, "\t")
@@ -28,8 +25,8 @@ func InstallVMwareDrivers() {
 	fmt.Printf("\t [i] Performed %d of %d operations\n", okOperations, len(driverfiles))
 }
 
-func UninstallVMwareDrivers() {
-	fmt.Printf("Removing VMware host drivers on system:\n")
+func UninstallVirtualBoxDrivers() {
+	fmt.Printf("Removing VirtualBox host drivers on system:\n")
 	okOperations := 0
 	for destination, _ := range driverfiles {
 		res, _ := utils.FileExists(destination)
@@ -45,8 +42,8 @@ func UninstallVMwareDrivers() {
 	fmt.Printf("\t [i] Performed %d of %d operations\n", okOperations, len(driverfiles))
 }
 
-func CheckVMwareDrivers() {
-	fmt.Printf("Checking  VMware host drivers on system:\n")
+func CheckVirtualBoxDrivers() {
+	fmt.Printf("Checking  VirtualBox host drivers on system:\n")
 	okOperations := 0
 	for destination, _ := range driverfiles {
 		res, _ := utils.FileExists(destination)

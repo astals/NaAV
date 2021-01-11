@@ -12,11 +12,11 @@ Most advanced malware binaries use sandbox detection to avoid being analyzed by 
 NaAV configures the target system to make the malware think it has landed on an analysis system and in most cases induce to delete itself, stop the execution, don't download stage 2 binaries/modules, etc.
 
 ### Example Use case 2
-The Check option (naav.exe --check) alows you to detect in seconds if your sandboxes or honeypods can be easily detected by binaries with anti-VM checks.
+The Check option (naav.exe --check) allows you to detect in seconds if your sandboxes or honeypods can be easily detected by binaries with anti-VM checks.
 
 ## <ins>Why use NaAV as an attacker?</ins>
 
-The Check option (naav.exe --check) alows you to detect in seconds if you have landed on a poorly configured Honeypot.
+The Check option (naav.exe --check) allows you to detect in seconds if you have landed on a poorly configured honeypot.
 
 ## <ins>NaAV Numbers</ins>
 *with default config
@@ -31,13 +31,13 @@ The Check option (naav.exe --check) alows you to detect in seconds if you have l
 | Hardware Recognition Checks | -- |
 
 ## <ins>Basic usage</ins>
-naav.exe --install [configFile] -> Install, this acction requires a configuration file, you can see an example on https://github.com/astals/NaAV/blob/main/config.json
+naav.exe --install [configFile] -> Install, this action requires a configuration file, you can see an example on https://github.com/astals/NaAV/blob/main/config.json
 
-naav.exe --uninstall -> Uninstall, to uninstall is recommended running 'C:\\Program Files (x86)\\NaAV\\naav.exe -u' instead of using the downloaded file
+naav.exe --uninstall -> Uninstall, to uninstall is recommended running 'C:\\Program Files (x86)\\NaAV\\naav.exe --uninstall' instead of using the downloaded file
 
 naav.exe --update -> Update
 
-naav.exe --check -> Check, this action checks your system in order to know how many Virtual Machine checks it passes
+naav.exe --check -> Check, this action checks your system to know how many Virtual Machine checks it passes
 
 naav.exe -v/--version -> Versions (installed and current binary)
 
@@ -48,7 +48,7 @@ naav.exe -h/--help -> Help
 |Functionality | Status | Version | Details|
 |:-------------|:-------------:|:-------------:|:-------------|
 | Fake Guest Drivers | Implemented | 0.1 | C:\\WINDOWS\\system32\\drivers\\vmhgfs.sys, C:\\WINDOWS\\system32\\drivers\\vmmouse.sys|
-| Fake Guest Files | Implemented | 0.1 |	"C:\\Windows\\System32\\vm3d*, C:\\Windows\\System32\\vmGuestLib*,	C:\\Windows\\System32\\vmhgfs.dll, C:\\Windows\\System32\\VMWSU.DLL|
+| Fake Guest Files | Implemented | 0.1 |	C:\\Windows\\System32\\vm3d*, C:\\Windows\\System32\\vmGuestLib*,	C:\\Windows\\System32\\vmhgfs.dll, C:\\Windows\\System32\\VMWSU.DLL|
 | Fake Guest Network Interfaces | WIP | 0.1 | |
 | Fake Guest Processes & Services| WIP | 0.1 | Defined in config file |
 | Fake Guest Registry Keys | WIP | 0.1 | |
@@ -56,7 +56,7 @@ naav.exe -h/--help -> Help
 ### Virtualbox Emulation
 |Functionality | Status | Version | Details|
 |:-------------:|:-------------:|:-------------:|:-------------|
-| Fake Guest Drivers | WIP | 0.1 | |
+| Fake Guest Drivers | Implemented | 0.1 | C:\\WINDOWS\\system32\\drivers\\VBox* |
 | Fake VirtualBox Guest Additions Files| Implemented | 0.1 | C:\\Program Files\\Oracle\\VirtualBox Guest Additions\\* , C:\\Windows\\System32\\VBox*  |
 | Fake Guest Network Interfaces | WIP | 0.1 | |
 | Fake Guest Processes & Services| WIP | 0.1 | Defined in config file |

@@ -18,6 +18,7 @@ type Configuration struct {
 		FakeProcesses              []string
 	}
 	VirtualBox struct {
+		FakeGuestDrivers                  bool
 		FakeVirtualBoxGuestAdditionsFiles bool
 		FakeGuestNetworkInterfaces        bool
 		FakeProcesses                     []string
@@ -40,6 +41,9 @@ func Install(ConfigFile string) {
 	}
 	if Config.WMware.FakeGuestFiles {
 		VMware.InstallVMwareGuestFiles()
+	}
+	if Config.VirtualBox.FakeGuestDrivers{
+		VirtualBox.InstallVirtualBoxDrivers()
 	}
 	if Config.VirtualBox.FakeVirtualBoxGuestAdditionsFiles {
 		VirtualBox.InstallVirtualBoxGuestAdditionsFiles()

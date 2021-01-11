@@ -8,5 +8,6 @@ import (
 func Uninstall() {
 	VMware.UninstallVMwareDrivers()
 	VMware.UninstallVMwareGuestFiles()
+	VirtualBox.UninstallVirtualBoxDrivers()
 	VirtualBox.UninstallVirtualBoxGuestAdditionsFiles()
 }
