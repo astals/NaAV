@@ -7,6 +7,16 @@ import (
 )
 
 var files = map[string]string{
+	"C:\\Windows\\System32\\VBoxControl.exe":                                                          "resources\\dummy",
+	"C:\\Windows\\System32\\VBoxDispD3D.dll":                                                          "resources\\dummy",
+	"C:\\Windows\\System32\\VBoxGL.dll":                                                               "resources\\dummy",
+	"C:\\Windows\\System32\\VBoxHook.dll":                                                             "resources\\dummy",
+	"C:\\Windows\\System32\\VBoxICD.dll":                                                              "resources\\dummy",
+	"C:\\Windows\\System32\\VBoxMRXNP.dll":                                                            "resources\\dummy",
+	"C:\\Windows\\System32\\VBoxNine.dll":                                                             "resources\\dummy",
+	"C:\\Windows\\System32\\VBoxService.exe":                                                          "resources\\dummy",
+	"C:\\Windows\\System32\\VBoxSVGA.dll":                                                             "resources\\dummy",
+	"C:\\Windows\\System32\\VBoxTray.exe":                                                             "resources\\dummy",
 	"C:\\Program Files\\Oracle\\VirtualBox Guest Additions\\DIFxAPI.dll":                              "resources\\dummy",
 	"C:\\Program Files\\Oracle\\VirtualBox Guest Additions\\iexplore.ico":                             "resources\\dummy",
 	"C:\\Program Files\\Oracle\\VirtualBox Guest Additions\\install_drivers.log":                      "resources\\dummy",
@@ -57,8 +67,13 @@ func UninstallVirtualBoxGuestAdditionsFiles() {
 	fmt.Printf("Removing VirtualBox Guest Additions files on system:\n")
 	okOperations := 0
 	for destination, _ := range files {
-		success, err := utils.DeleteIfIsNaAVFile(destination, "\t")
-		if success && err == nil {
+		res, _ := utils.FileExists(destination)
+		if res {
+			success, err := utils.DeleteIfIsNaAVFile(destination, "\t")
+			if success && err == nil {
+				okOperations++
+			}
+		} else {
 			okOperations++
 		}
 	}

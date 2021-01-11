@@ -12,7 +12,8 @@ import (
 
 type Configuration struct {
 	WMware struct {
-		FakeDrivers                bool
+		FakeGuestDrivers           bool
+		FakeGuestFiles             bool
 		FakeGuestNetworkInterfaces bool
 		FakeProcesses              []string
 	}
@@ -34,12 +35,16 @@ func Install(ConfigFile string) {
 	}
 	Config := ReadConfigFile(ConfigFile)
 	cloneInstallFiles(ConfigFile)
-	if Config.WMware.FakeDrivers {
+	if Config.WMware.FakeGuestDrivers {
 		VMware.InstallVMwareDrivers()
+	}
+	if Config.WMware.FakeGuestFiles {
+		VMware.InstallVMwareGuestFiles()
 	}
 	if Config.VirtualBox.FakeVirtualBoxGuestAdditionsFiles {
 		VirtualBox.InstallVirtualBoxGuestAdditionsFiles()
 	}
+
 }
 
 func ReadConfigFile(ConfigFile string) Configuration {

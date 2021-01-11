@@ -32,23 +32,43 @@ naav.exe -v/--version -> Versions (installed and current binary)
 naav.exe -h/--help -> Help
 
 
-## <ins>Functionalities</ins>
+## <ins>NaAV Numbers</ins>
+*with default config
+
+|Functionality | nº |
+|:-------------|:-------------:|
+| Fake Guest Drivers & Files | ~200 |
+| Fake Guest Processes & Services | ~5 |
+| Fake Analysis Tools Processes | ~40 |
+| Fake Network Interfaces | -- |
+| Fake Registry Keys | -- |
+
+## <ins>Install & Check Functionalities</ins>
 ### VMware Emulation
-|Functionality | Status | Version |
-|:-------------|:-------------:|:-------------:|
-| Fake C:\\WINDOWS\\system32\\drivers\\vmhgfs.sys driver | Implemented | 0.1 |
-| Fake C:\\WINDOWS\\system32\\drivers\\vmmouse.sys driver | Implemented | 0.1 |
-| Fake guest Network interface | WIP | 0.1 |
+|Functionality | Status | Version | Details|
+|:-------------|:-------------:|:-------------:|:-------------|
+| Fake Guest Drivers | Implemented | 0.1 | C:\\WINDOWS\\system32\\drivers\\vmhgfs.sys, C:\\WINDOWS\\system32\\drivers\\vmmouse.sys|
+| Fake Guest Files | Implemented | 0.1 |	"C:\\Windows\\System32\\vm3d*, C:\\Windows\\System32\\vmGuestLib*,	C:\\Windows\\System32\\vmhgfs.dll, C:\\Windows\\System32\\VMWSU.DLL|
+| Fake Guest Network Interfaces | WIP | 0.1 | |
+| Fake Guest Processes & Services| WIP | 0.1 | Defined in config file |
+| Fake Guest Registry Keys | WIP | 0.1 | |
 
 ### Virtualbox Emulation
-|Functionality | Status | Version |
-|:-------------|:-------------:|:-------------:|
-|Fake VirtualBox Guest Additions Files (C:\\Program Files\\Oracle\\VirtualBox Guest Additions\\*)| Implemented | 0.1 |
-| Fake drivers | WIP | 0.1 |
-| Fake guest Network interface | WIP | 0.1 |
+|Functionality | Status | Version | Details|
+|:-------------:|:-------------:|:-------------:|:-------------|
+| Fake Guest Drivers | WIP | 0.1 | |
+| Fake VirtualBox Guest Additions Files| Implemented | 0.1 | C:\\Program Files\\Oracle\\VirtualBox Guest Additions\\*, C:\\Windows\\System32\\VBox*  |
+| Fake Guest Network Interfaces | WIP | 0.1 | |
+| Fake Guest Processes & Services| WIP | 0.1 | Defined in config file |
+| Fake Guest Registry Keys | WIP | 0.1 | |
 
 ### Analysis Tools Emulation
-|Functionality | Status | Version |
+|Functionality | Status | Version | Details|:-------------|
 |:-------------|:-------------:|:-------------:|
-| Fake processes (~40, defined in config file) | WIP | 0.1 |
+| Fake Processes | WIP | 0.1 | ~40, defined in config file |
 
+## <ins>Functionalities only availabe on Check</ins>
+
+|Functionality | Status | Version | Details|
+|:-------------|:-------------:|:-------------:|:-------------|
+| Hardware Recognition | WIP | 0.1 | CPU, RAM, HDD, etc |

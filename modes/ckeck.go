@@ -7,6 +7,6 @@ import (
 
 func Check() {
 	VMware.CheckVMwareDrivers()
+	VMware.CheckVMwareGuestFiles()
 	VirtualBox.CheckVirtualBoxGuestAdditionsFiles()
-
 }
