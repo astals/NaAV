@@ -12,11 +12,23 @@ Most advanced malware binaries use sandbox detection to avoid being analyzed by 
 NaAV configures the target system to make the malware think it has landed on an analysis system and in most cases induce to delete itself, stop the execution, don't download stage 2 binaries/modules, etc.
 
 ### Example Use case 2
-The Check option (naav.exe -c) alows you to detect in seconds if your sandboxes or honeypods can be easily detected by binaries with anti-VM checks.
+The Check option (naav.exe --check) alows you to detect in seconds if your sandboxes or honeypods can be easily detected by binaries with anti-VM checks.
 
 ## <ins>Why use NaAV as an attacker?</ins>
 
-The Check option (naav.exe -c) alows you to detect in seconds if you have landed on a poorly configured Honeypot.
+The Check option (naav.exe --check) alows you to detect in seconds if you have landed on a poorly configured Honeypot.
+
+## <ins>NaAV Numbers</ins>
+*with default config
+
+|Functionality | nº |
+|:-------------|:-------------:|
+| Fake Guest Drivers & Files | ~200 |
+| Fake Guest Processes & Services | ~5 |
+| Fake Analysis Tools Processes | ~40 |
+| Fake Network Interfaces | -- |
+| Fake Registry Keys | -- |
+| Hardware Recognition Checks | -- |
 
 ## <ins>Basic usage</ins>
 naav.exe --install [configFile] -> Install, this acction requires a configuration file, you can see an example on https://github.com/astals/NaAV/blob/main/config.json
@@ -30,18 +42,6 @@ naav.exe --check -> Check, this action checks your system in order to know how m
 naav.exe -v/--version -> Versions (installed and current binary)
 
 naav.exe -h/--help -> Help
-
-
-## <ins>NaAV Numbers</ins>
-*with default config
-
-|Functionality | nº |
-|:-------------|:-------------:|
-| Fake Guest Drivers & Files | ~200 |
-| Fake Guest Processes & Services | ~5 |
-| Fake Analysis Tools Processes | ~40 |
-| Fake Network Interfaces | -- |
-| Fake Registry Keys | -- |
 
 ## <ins>Install & Check Functionalities</ins>
 ### VMware Emulation
