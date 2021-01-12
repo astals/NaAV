@@ -1,15 +1,16 @@
 {
 	"WMware":{
-		"FakeGuestDrivers":true,
-		"FakeGuestFiles":true,
-		"FakeGuestNetworkInterfaces":true,
+		"FakeGuestDrivers":false,
+		"FakeGuestFiles":false,
+		"FakeGuestNetworkInterfaces":false,
 		"FakeGuestProcesses": ["VGAuthService.exe","vm3dservice","vmtoolsd","vmware-tray.exe"]
 	},
 	"VirtualBox":{
-		"FakeVirtualBoxGuestAdditionsFiles":true,
-		"FakeGuestNetworkInterfaces":true,
+		"FakeVirtualBoxGuestAdditionsFiles":false,
+		"FakeGuestNetworkInterfaces":false,
 		"FakeGuestAdditionsProcesses": ["VBoxService.exe","VBoxTray.exe"]
 	},
+	"OtherRegistryKeys":true,
 	"AnalysisTools":{
 		"FakeProcesses":["AccessEnum.exe", "Autoruns.exe", "Autoruns64.exe", "Diskmon.exe", "ImmunityDebugger.exe", "LastActivityView.chm", "LastActivityView.exe", "NetworkMiner.exe", "Procmon.exe", "Procmon64.exe", "PsService.exe", "PsService64.exe", "Pstools.chm", "WinDbg.exe", "Wireshark.exe", "autoruns.chm", "autorunsc.exe", "autorunsc.exe", "ida64.exe", "idag.exe", "idaq.exe", "ollydbg.exe", "procdump.exe", "procdump64.exe", "procexp.exe", "procexp64.exe", "pslist.exe", "pslist64.exe", "psloglist.exe", "psloglist64.exe", "python.exe", "tcpview.chm", "tcpview.exe", "vmacthlp.exe", "vmmap.exe", "vmmap64.exe", "volatility_2.6_win64_standalone.exe", "yara.exe", "yara32.exe", "yara64.exe", "yarac.exe", "yarac32.exe", "yarac64.exe"]
 	}

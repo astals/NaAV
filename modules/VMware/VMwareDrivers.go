@@ -7,6 +7,8 @@ import (
 )
 
 var driverfiles = map[string]string{
+	"C:\\WINDOWS\\system32\\drivers\\vmmouse.sys.sys":   "resources\\dummy",
+	"C:\\WINDOWS\\system32\\drivers\\vmhgfs.sys":        "resources\\dummy",
 	"C:\\WINDOWS\\system32\\drivers\\vmrawdsk.sys":      "resources\\dummy",
 	"C:\\WINDOWS\\system32\\drivers\\vmmemctl.sys":      "resources\\dummy",
 	"C:\\WINDOWS\\system32\\drivers\\vmusbmouse.sys":    "resources\\dummy",

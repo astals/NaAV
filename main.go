@@ -23,9 +23,9 @@ func main() {
 	}
 	res := CheckIfRunningWithElevatedPrivileges()
 	if res == false {
-		fmt.Printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \n")
-		fmt.Printf("Most actions like creation of fake drivers, network interfaces, registry keys, etc require administration pivileges \n")
-		fmt.Printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \n")
+		fmt.Printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \n")
+		fmt.Printf("Most actions (creation of fake drivers, network interfaces, etc) require administration pivileges \n")
+		fmt.Printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \n")
 		/*reader := bufio.NewReader(os.Stdin)
 		fmt.Printf("Continue anyway [y/n]:")
 		text, _ := reader.ReadString('\n')

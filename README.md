@@ -1,7 +1,8 @@
 <p align="center">
 <img src="https://raw.githubusercontent.com/astals/NaAv/main/logo.png" />
           
-**TLDR;** NaAV makes the system simulate it's a malware analysis sandbox.
+**TLDR;** NaAV configures the system to simulate it's a malware analysis sandbox.
+**TLDR2;** NaAV can check if the system is a honeypot.
 
 **Stable Release:** None, still on development
 
@@ -23,11 +24,11 @@ The Check option (naav.exe --check) allows you to detect in seconds if you have 
 
 |Functionality | nº |
 |:-------------|:-------------:|
-| Fake Guest Drivers & Files | ~200 |
-| Fake Guest Processes & Services | ~5 |
-| Fake Analysis Tools Processes | ~40 |
-| Fake Network Interfaces | -- |
-| Fake Registry Keys | -- |
+| Guest Drivers & Files | ~200 |
+| Guest Processes & Services | ~5 |
+| Analysis Tools Processes | ~40 |
+| Network Interfaces | -- |
+| Registry Keys | -- |
 | Hardware Recognition Checks | -- |
 
 ## <ins>Basic usage</ins>
@@ -37,9 +38,11 @@ naav.exe --uninstall -> Uninstall, to uninstall is recommended running 'C:\\Prog
 
 naav.exe --update -> Update
 
+naav.exe -v -> Verbose 
+
 naav.exe --check -> Check, this action checks your system to know how many Virtual Machine checks it passes
 
-naav.exe -v/--version -> Versions (installed and current binary)
+naav.exe --version -> Versions (installed and current binary)
 
 naav.exe -h/--help -> Help
 
@@ -47,8 +50,8 @@ naav.exe -h/--help -> Help
 ### VMware Emulation
 |Functionality | Status | Version | Details|
 |:-------------|:-------------:|:-------------:|:-------------|
-| Fake Guest Drivers | Implemented | 0.1 | C:\\WINDOWS\\system32\\drivers\\vmhgfs.sys, C:\\WINDOWS\\system32\\drivers\\vmmouse.sys|
-| Fake Guest Files | Implemented | 0.1 |	C:\\Windows\\System32\\vm3d*, C:\\Windows\\System32\\vmGuestLib*,	C:\\Windows\\System32\\vmhgfs.dll, C:\\Windows\\System32\\VMWSU.DLL|
+| Fake Guest Drivers | Implemented | 0.1 | C:\\WINDOWS\\system32\\drivers\\vm3dmp* C:\\WINDOWS\\system32\\drivers\\vmhgfs.sys, C:\\WINDOWS\\system32\\drivers\\vmmouse.sys ,C:\\WINDOWS\\system32\\drivers\\vmrawdsk.sys, C:\\WINDOWS\\system32\\drivers\\vmmemctl.sys, C:\\WINDOWS\\system32\\drivers\\vmusbmouse.sys|
+| Fake Guest Files | Implemented | 0.1 |C:\\Program Files\\VMware\\VMware Tools\\* ,	C:\\Windows\\System32\\vm3d*, C:\\Windows\\System32\\vmGuestLib*,	C:\\Windows\\System32\\vmhgfs.dll, C:\\Windows\\System32\\VMWSU.DLL|
 | Fake Guest Network Interfaces | WIP | 0.1 | |
 | Fake Guest Processes & Services| WIP | 0.1 | Defined in config file |
 | Fake Guest Registry Keys | WIP | 0.1 | |
