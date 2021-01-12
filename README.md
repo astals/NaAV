@@ -38,8 +38,6 @@ naav.exe --uninstall -> Uninstall, to uninstall is recommended running 'C:\\Prog
 
 naav.exe --update -> Update
 
-naav.exe -v -> Verbose 
-
 naav.exe --check -> Check, this action checks your system to know how many Virtual Machine checks it passes
 
 naav.exe --version -> Versions (installed and current binary)
@@ -50,8 +48,8 @@ naav.exe -h/--help -> Help
 ### VMware Emulation
 |Functionality | Status | Version | Details|
 |:-------------|:-------------:|:-------------:|:-------------|
-| Fake Guest Drivers | Implemented | 0.1 | C:\\WINDOWS\\system32\\drivers\\vm3dmp* C:\\WINDOWS\\system32\\drivers\\vmhgfs.sys, C:\\WINDOWS\\system32\\drivers\\vmmouse.sys ,C:\\WINDOWS\\system32\\drivers\\vmrawdsk.sys, C:\\WINDOWS\\system32\\drivers\\vmmemctl.sys, C:\\WINDOWS\\system32\\drivers\\vmusbmouse.sys|
-| Fake Guest Files | Implemented | 0.1 |C:\\Program Files\\VMware\\VMware Tools\\* ,	C:\\Windows\\System32\\vm3d*, C:\\Windows\\System32\\vmGuestLib*,	C:\\Windows\\System32\\vmhgfs.dll, C:\\Windows\\System32\\VMWSU.DLL|
+| Fake Guest Drivers | Implemented | 0.1 | C:\\WINDOWS\\system32\\drivers\\vm3dmp* C:\\WINDOWS\\system32\\drivers\\vmhgfs.sys, C:\\WINDOWS\\system32\\drivers\\vmmouse.sys, C:\\WINDOWS\\system32\\drivers\\vmrawdsk.sys, C:\\WINDOWS\\system32\\drivers\\vmmemctl.sys, C:\\WINDOWS\\system32\\drivers\\vmusbmouse.sys|
+| Fake Guest Files | Implemented | 0.1 |C:\\Program Files\\VMware\\VMware Tools\\* ,C:\\Windows\\System32\\vm3d*, C:\\Windows\\System32\\vmGuestLib*,	C:\\Windows\\System32\\vmhgfs.dll, C:\\Windows\\System32\\VMWSU.DLL|
 | Fake Guest Network Interfaces | WIP | 0.1 | |
 | Fake Guest Processes & Services| WIP | 0.1 | Defined in config file |
 | Fake Guest Registry Keys | WIP | 0.1 | |

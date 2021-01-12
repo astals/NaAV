@@ -17,10 +17,13 @@ func InstallRegkeys(regkeys map[string][]string, printPrepend string) {
 			continue
 		}
 		for _, v := range value {
-			err = WriteValue(k, v)
-			if err != nil {
-				fmt.Printf("%s [!] ER-FU002 can't create registry namevalue %s  on registry key %s ,%s \n", printPrepend, v, key, err)
-				continue
+			if !ExistsValuename(k, v) {
+				err = WriteValue(k, v)
+				if err != nil {
+					fmt.Printf("%s [!] ER-FU002 can't create registry namevalue %s  on registry key %s ,%s \n", printPrepend, v, key, err)
+					continue
+				}
+				fmt.Printf("%s Skipping namevalue %s on registry key %s , variable already exits \n", printPrepend, v, key)
 			}
 			okOperations++
 		}
@@ -117,6 +120,7 @@ func CreateRetrieveRegKey(completepath string) (registry.Key, error) {
 }
 
 func WriteValue(key registry.Key, valuename string) error {
+	//check if value exists
 	return key.SetStringValue(valuename, "NaAV")
 }
 
