@@ -1,6 +1,6 @@
 <p align="center">
 <img src="https://raw.githubusercontent.com/astals/NaAv/main/logo.png" />
-<br> <br> <br> <br> <br> 
+
 **TLDR;** NaAV configures the system to simulate it's a malware analysis sandbox.
 
 **TLDR2;** NaAV can check if the system is a honeypot.
@@ -50,7 +50,7 @@ naav.exe -h/--help -> Help
 |Functionality | Status | Version | Details|
 |:-------------|:-------------:|:-------------:|:-------------|
 | Fake Guest Drivers | Implemented | 0.1 | C:\\WINDOWS\\system32\\drivers\\vm3dmp*<br> C:\\WINDOWS\\system32\\drivers\\vmhgfs.sys<br> C:\\WINDOWS\\system32\\drivers\\vmmouse.sys<br> C:\\WINDOWS\\system32\\drivers\\vmrawdsk.sys<br> C:\\WINDOWS\\system32\\drivers\\vmmemctl.sys<br> C:\\WINDOWS\\system32\\drivers\\vmusbmouse.sys|
-| Fake Guest Files | Implemented | 0.1 |C:\\Program Files\\VMware\\VMware Tools\\*<br> C:\\Windows\\System32\\vm3d*<br> C:\\Windows\\System32\\vmGuestLib*<br> C:\\Windows\\System32\\vmhgfs.dll<br> C:\\Windows\\System32\\VMWSU.DLL|
+| Fake Guest Files | Implemented | 0.1 |C:\\Program Files\\VMware\\VMware Tools\\* <br> C:\\Windows\\System32\\vm3d* <br> C:\\Windows\\System32\\vmGuestLib*<br> C:\\Windows\\System32\\vmhgfs.dll<br> C:\\Windows\\System32\\VMWSU.DLL|
 | Fake Guest Network Interfaces | WIP | 0.1 | |
 | Fake Guest Processes & Services| WIP | 0.1 | Defined in config file |
 | Fake Guest Registry Keys | WIP | 0.1 | |
