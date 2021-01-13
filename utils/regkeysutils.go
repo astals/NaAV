@@ -13,14 +13,14 @@ func InstallRegkeys(regkeys map[string][]string, printPrepend string) {
 	for key, value := range regkeys {
 		k, err := CreateRetrieveRegKey(key)
 		if err != nil {
-			fmt.Printf("%s [!] ER-FU001 can't create registry key %s ,%s \n", printPrepend, key, err)
+			fmt.Printf("%s [!] ER-RU001 can't create registry key %s ,%s \n", printPrepend, key, err)
 			continue
 		}
 		for _, v := range value {
 			if !ExistsValuename(k, v) {
 				err = WriteValue(k, v)
 				if err != nil {
-					fmt.Printf("%s [!] ER-FU002 can't create registry namevalue %s  on registry key %s ,%s \n", printPrepend, v, key, err)
+					fmt.Printf("%s [!] ER-RU002 can't create registry namevalue %s  on registry key %s ,%s \n", printPrepend, v, key, err)
 					continue
 				}
 				fmt.Printf("%s Skipping namevalue %s on registry key %s , variable already exits \n", printPrepend, v, key)
@@ -31,38 +31,72 @@ func InstallRegkeys(regkeys map[string][]string, printPrepend string) {
 	fmt.Printf("%s [i] Performed %d of %d operations\n", printPrepend, okOperations, len(regkeys))
 }
 
-/*
-func UninstallRegkeys(regkeys map[string][]string, printPrepend string) error {
+func UninstallRegkeys(regkeys map[string][]string, printPrepend string) {
 	okOperations := 0
-	for key, value  := range regkeys {
+	NokOperations := 0
+	for key, value := range regkeys {
+		exists, _ := ExistsRegKey(key)
+		if !exists {
+			okOperations++
+			continue
+		}
 		k, err := CreateRetrieveRegKey(key)
+		for _, v := range value {
+			valuenames, _ := GeyKeyValueNames(k)
+			if ElementInStringArray(v, valuenames) {
+				valuecontent := GetValue(k, v)
+				if valuecontent != "NaAV" {
+					okOperations++
+					continue
+				}
+				err = DeleteValue(k, v)
+				if err != nil {
+					fmt.Printf("%s [!] ER-RU002 Unable to delete value %s on registry key %s \n", printPrepend, v, key)
+					NokOperations++
+					continue
+				} else {
+					okOperations++
+				}
+			}
+		}
+		valuenames, _ := GeyKeyValueNames(k)
+		if len(valuenames) == 0 {
+			err = DeleteKey(key)
+		}
 		if err != nil {
-			continue
+			fmt.Printf("%s [!] ER-RU002 Unable to delete key %s \n", printPrepend, key)
+			NokOperations++
+		} else {
+			okOperations++
 		}
-		value, err = GetValue(k, key)
-		if err != nil {
-			continue
-		}
-		if value == "NaAV" {
-			DeleteValueName(k)
-		}
-		if err != nil {
-			continue
-		}
-		valuenames, err := GeyKeyValueNames(k)
-		if err != nil {
-
-		} else if len(valuenames) == 0 {
-			err = DeleteKey(key.KeyComplatePath)
-		}
-		if err != nil {
-
-		}
-		okOperations++
 	}
-	fmt.Printf("%s [i] Performed %d of %d operations\n", printPrepend, okOperations, len(regkeys))
+	fmt.Printf("%s [i] Performed %d of %d operations\n", printPrepend, okOperations, okOperations+NokOperations)
 }
 
+func SafePurgeTrees(trees []string, printPrepend string) {
+	okOperations := 0
+	for _, tree := range trees {
+		exists, _ := ExistsRegKey(tree)
+		if exists {
+			k, _ := CreateRetrieveRegKey(tree)
+			values, _ := GeyKeyValueNames(k)
+			subkeys, _ := k.ReadSubKeyNames(-1)
+			if len(subkeys) == 0 && len(values) == 0 {
+				err := DeleteKey(tree)
+				if err != nil {
+					fmt.Printf("%s [!] ER-RU003 Unable to delete key %s \n", printPrepend, tree)
+				} else {
+					okOperations++
+				}
+			}
+		} else {
+			okOperations++
+		}
+	}
+	fmt.Printf("%s [i] Performed %d of %d operations\n", printPrepend, okOperations, len(trees))
+}
+
+/*
 func CheckRegkeys(regkeys map[string][]string, printPrepend string) error {
 	okOperations := 0
 	paths := []string
@@ -129,8 +163,8 @@ func GetValue(key registry.Key, valuename string) string {
 	return val
 }
 
-func DeleteValueName(key registry.Key, valuename string) {
-	key.DeleteValue(valuename)
+func DeleteValue(key registry.Key, valuename string) error {
+	return key.DeleteValue(valuename)
 }
 
 func GeyKeyValueNames(k registry.Key) ([]string, error) {

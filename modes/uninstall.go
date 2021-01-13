@@ -1,13 +1,15 @@
 package modes
 
 import (
-	"../modules/VMware"
-	"../modules/VirtualBox"
+	"../modules/Others"
 )
 
 func Uninstall() {
-	VMware.UninstallVMwareDrivers()
-	VMware.UninstallVMwareGuestFiles()
-	VirtualBox.UninstallVirtualBoxDrivers()
-	VirtualBox.UninstallVirtualBoxGuestAdditionsFiles()
+	/*
+		VMware.UninstallVMwareDrivers()
+		VMware.UninstallVMwareGuestFiles()
+		VirtualBox.UninstallVirtualBoxDrivers()
+		VirtualBox.UninstallVirtualBoxGuestAdditionsFiles()
+	*/
+	Others.UninstallOtherRegistryKeys()
 }
