@@ -9,5 +9,5 @@ var regKeysAndValueNames = map[string][]string{
 }
 
 func InstallVirtualBoxRegistry() {
-	utils.InstallRegkeys(regKeysAndValueNames, "\t")
+	utils.InstallRegkeys(regKeysAndValueNames, 2, "\t")
 }

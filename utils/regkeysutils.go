@@ -3,136 +3,175 @@ package utils
 import (
 	"errors"
 	"fmt"
+	"os/exec"
+	"regexp"
 	"strings"
 
 	"golang.org/x/sys/windows/registry"
 )
 
-func InstallRegkeys(regkeys map[string][]string, printPrepend string) {
+func InstallRegkeys(regkeys map[string][]string, verbosityLevel int, printPrepend string) {
 	okOperations := 0
+	NokOperations := 0
 	for key, value := range regkeys {
 		k, err := CreateRetrieveRegKey(key)
 		if err != nil {
-			fmt.Printf("%s [!] ER-RU001 can't create registry key %s ,%s \n", printPrepend, key, err)
+			printIfEnoughLevel(fmt.Sprintf("%s [!] ER-RU001 can't create/retrieve registry key %s ,%s \n", printPrepend, key, err), verbosityLevel, 1)
+			NokOperations++
 			continue
 		}
+		okOperations++
+		printIfEnoughLevel(fmt.Sprintf("%s [i] Successfully created/retrieved registry key %s \n", printPrepend, key), verbosityLevel, 3)
 		for _, v := range value {
 			if !ExistsValuename(k, v) {
 				err = WriteValue(k, v)
 				if err != nil {
-					fmt.Printf("%s [!] ER-RU002 can't create registry namevalue %s  on registry key %s ,%s \n", printPrepend, v, key, err)
+					printIfEnoughLevel(fmt.Sprintf("%s [!] ER-RU002 can't create registry namevalue %s  on registry key %s ,%s \n", printPrepend, v, key, err), verbosityLevel, 1)
+					NokOperations++
 					continue
 				}
-				fmt.Printf("%s Skipping namevalue %s on registry key %s , variable already exits \n", printPrepend, v, key)
+				printIfEnoughLevel(fmt.Sprintf("%s [i] Successfully created %s on registry key %s \n", printPrepend, v, key), verbosityLevel, 3)
+			} else {
+				printIfEnoughLevel(fmt.Sprintf("%s [i] Skipping namevalue %s on registry key %s, variable already exits \n", printPrepend, v, key), verbosityLevel, 2)
 			}
 			okOperations++
 		}
 	}
-	fmt.Printf("%s [i] Performed %d of %d operations\n", printPrepend, okOperations, len(regkeys))
+	printIfEnoughLevel(fmt.Sprintf("%s [i] Performed %d of %d operations\n", printPrepend, okOperations, okOperations+NokOperations), verbosityLevel, 0)
 }
 
-func UninstallRegkeys(regkeys map[string][]string, printPrepend string) {
+func UninstallRegkeys(regkeys map[string][]string, verbosityLevel int, printPrepend string) {
 	okOperations := 0
 	NokOperations := 0
 	for key, value := range regkeys {
-		exists, _ := ExistsRegKey(key)
+		exists := ExistsRegKey(key)
 		if !exists {
-			okOperations++
+			printIfEnoughLevel(fmt.Sprintf("%s Skipping registry key %s & it's namevalues, not found \n", printPrepend, key), verbosityLevel, 2)
+			okOperations = okOperations + 1 + len(value)
 			continue
 		}
 		k, err := CreateRetrieveRegKey(key)
+		if err != nil {
+			printIfEnoughLevel(fmt.Sprintf("%s [!] ER-RU002 can't retrieve registry key %s ,%s \n", printPrepend, key, err), verbosityLevel, 1)
+			continue
+		}
+		valuenames, _ := GeyKeyValueNames(k)
 		for _, v := range value {
-			valuenames, _ := GeyKeyValueNames(k)
 			if ElementInStringArray(v, valuenames) {
 				valuecontent := GetValue(k, v)
 				if valuecontent != "NaAV" {
+					printIfEnoughLevel(fmt.Sprintf("%s Skipping value %s on registry key %s, not NaAV value \n", printPrepend, v, key), verbosityLevel, 2)
 					okOperations++
 					continue
 				}
 				err = DeleteValue(k, v)
 				if err != nil {
-					fmt.Printf("%s [!] ER-RU002 Unable to delete value %s on registry key %s \n", printPrepend, v, key)
+					printIfEnoughLevel(fmt.Sprintf("%s [!] ER-RU003 Unable to delete value %s on registry key %s \n", printPrepend, v, key), verbosityLevel, 1)
 					NokOperations++
 					continue
 				} else {
+					printIfEnoughLevel(fmt.Sprintf("%s [i] Successfully deleted valuename %s on key %s \n", printPrepend, v, key), verbosityLevel, 3)
 					okOperations++
 				}
 			}
 		}
-		valuenames, _ := GeyKeyValueNames(k)
 		if len(valuenames) == 0 {
 			err = DeleteKey(key)
 		}
 		if err != nil {
-			fmt.Printf("%s [!] ER-RU002 Unable to delete key %s \n", printPrepend, key)
+			printIfEnoughLevel(fmt.Sprintf("%s [!] ER-RU004 Unable to delete key %s \n", printPrepend, key), verbosityLevel, 1)
 			NokOperations++
 		} else {
+			printIfEnoughLevel(fmt.Sprintf("%s [i] Successfully deleted key %s \n", printPrepend, key), verbosityLevel, 3)
 			okOperations++
 		}
 	}
-	fmt.Printf("%s [i] Performed %d of %d operations\n", printPrepend, okOperations, okOperations+NokOperations)
+	printIfEnoughLevel(fmt.Sprintf("%s [i] Performed %d of %d operations\n", printPrepend, okOperations, okOperations+NokOperations), verbosityLevel, 0)
 }
 
-func SafePurgeTrees(trees []string, printPrepend string) {
+func CheckTrees(trees []string, verbosityLevel int, printPrepend string) {
+	detected := 0
+	for _, tree := range trees {
+		exists := ExistsRegKey(tree)
+		if exists {
+			detected++
+			printIfEnoughLevel(fmt.Sprintf("%s [i] detected %s \n", printPrepend, tree), verbosityLevel, 1)
+
+		} else {
+			printIfEnoughLevel(fmt.Sprintf("%s [i] Not detected %s \n", printPrepend, tree), verbosityLevel, 2)
+		}
+	}
+	printIfEnoughLevel(fmt.Sprintf("%s [i] detected %d of %d trees\n", printPrepend, detected, len(trees)), verbosityLevel, 0)
+}
+
+func SafePurgeTrees(trees []string, verbosityLevel int, printPrepend string) {
 	okOperations := 0
 	for _, tree := range trees {
-		exists, _ := ExistsRegKey(tree)
+		exists := ExistsRegKey(tree)
 		if exists {
-			k, _ := CreateRetrieveRegKey(tree)
-			values, _ := GeyKeyValueNames(k)
-			subkeys, _ := k.ReadSubKeyNames(-1)
+			key, err := CreateRetrieveRegKey(tree)
+			if err != nil {
+				printIfEnoughLevel(fmt.Sprintf("%s [!] ER-RU005 can't retrieve registry key %s ,%s \n", printPrepend, tree, err), verbosityLevel, 1)
+				continue
+			}
+			values, _ := GeyKeyValueNames(key)
+			subkeys, _ := key.ReadSubKeyNames(-1)
 			if len(subkeys) == 0 && len(values) == 0 {
 				err := DeleteKey(tree)
 				if err != nil {
-					fmt.Printf("%s [!] ER-RU003 Unable to delete key %s \n", printPrepend, tree)
+					printIfEnoughLevel(fmt.Sprintf("%s [!] ER-RU006 Unable to delete key %s, %s \n", printPrepend, tree, err), verbosityLevel, 1)
 				} else {
+					printIfEnoughLevel(fmt.Sprintf("%s [i] Deleted key %s \n", printPrepend, tree), verbosityLevel, 3)
 					okOperations++
 				}
 			}
 		} else {
+			printIfEnoughLevel(fmt.Sprintf("%s [i] Skipped key %s, not found \n", printPrepend, tree), verbosityLevel, 2)
 			okOperations++
 		}
 	}
-	fmt.Printf("%s [i] Performed %d of %d operations\n", printPrepend, okOperations, len(trees))
+	printIfEnoughLevel(fmt.Sprintf("%s [i] Performed %d of %d operations\n", printPrepend, okOperations, len(trees)), verbosityLevel, 0)
 }
 
-/*
-func CheckRegkeys(regkeys map[string][]string, printPrepend string) error {
-	okOperations := 0
-	paths := []string
-	// checking keys
-	for index, key := range regkeys {
-		paths = append(paths, key.KeyComplatePath)
-	}
-	uniquepaths := utils.uniquestrings(paths)
-	for index, path := range uniquepaths {
-		if ExistsRegKey(path) {
+func CheckRegkeys(regkeys map[string][]string, verbosityLevel int, printPrepend string) {
+	detected := 0
+	Ndetected := 0
+	for key, value := range regkeys {
+		exists := ExistsRegKey(key)
+		if !exists {
+			printIfEnoughLevel(fmt.Sprintf("%s [i] Not detected %s & it's namevalues\n", printPrepend, key), verbosityLevel, 2)
+			Ndetected = Ndetected + 1 + len(value)
+			continue
 		}
-	}
-	// checking valuenames
-	for index, path := range regkeys {
-		if ExistsRegKey(path) {
-			CreateRetrieveRegKey(path)
-			if ExistsValuename(key,valuename) {
+		detected++
+		printIfEnoughLevel(fmt.Sprintf("%s [i] Detected %s \n", printPrepend, key), verbosityLevel, 1)
+		k, _ := CreateRetrieveRegKey(key)
+		valuenames, _ := GeyKeyValueNames(k)
+		for _, v := range value {
+			if ElementInStringArray(v, valuenames) {
+				detected++
+				printIfEnoughLevel(fmt.Sprintf("%s [i] Detected %s value on key %s \n", printPrepend, v, key), verbosityLevel, 1)
+			} else {
+				Ndetected++
+				printIfEnoughLevel(fmt.Sprintf("%s [i] Not detected %s value on key %s \n", printPrepend, v, key), verbosityLevel, 2)
 			}
-
 		}
 	}
-	fmt.Printf("%s [i] Performed %d of %d operations\n", printPrepend, okOperations, len(regkeys))
-}*/
+	printIfEnoughLevel(fmt.Sprintf("%s [i] Detected %d of %d Registry Keys & Valuenames \n", printPrepend, detected, detected+Ndetected), verbosityLevel, 0)
+}
 
-func ExistsRegKey(completepath string) (bool, error) {
-	key, path := splitKeyString(completepath)
-	key, exists, err := registry.CreateKey(key, path, registry.QUERY_VALUE|registry.SET_VALUE)
+func ExistsRegKey(completepath string) bool {
+	// TODO until i find a better way...
+	var regex = regexp.MustCompile("^[a-zA-Z0-9_\\ ]*")
+	if !regex.MatchString(completepath) {
+		printIfEnoughLevel(fmt.Sprintf("------------> [!] who is my dirty boy? <------------\n"), 0, 0)
+		return false
+	}
+	_, err := exec.Command("reg", "query", completepath).Output()
 	if err != nil {
-		return false, err
+		return false
 	}
-	if exists {
-		return true, nil
-	} else {
-		DeleteKey(completepath)
-		return false, nil
-	}
+	return true
 }
 
 func ExistsValuename(key registry.Key, valuename string) bool {
@@ -200,4 +239,10 @@ func ValidCompletePath(completepath string) bool {
 		return true
 	}
 	return false
+}
+
+func printIfEnoughLevel(printstring string, verbosityLevel int, requiredMinLevel int) {
+	if verbosityLevel >= requiredMinLevel {
+		fmt.Print(printstring)
+	}
 }

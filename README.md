@@ -45,6 +45,9 @@ naav.exe --version -> Versions (installed and current binary)
 
 naav.exe -h/--help -> Help
 
+naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
+<img src="https://raw.githubusercontent.com/astals/NaAv/main/vebosityLevels.png" />
+
 ## <ins>Install & Check Functionalities</ins>
 ### VMware Emulation
 |Functionality | Status | Version | Details|
@@ -68,6 +71,13 @@ naav.exe -h/--help -> Help
 |Functionality | Status | Version | Details|
 |:-------------|:-------------:|:-------------:|:-------------|
 | Fake Processes | WIP | 0.1 | ~40, defined in config file |
+
+### Others
+|Functionality | Status | Version | Details|
+|:-------------|:-------------:|:-------------:|:-------------|
+| Wine Registry Keys | WIP | 0.1 | "HKEY_CURRENT_USER\\SOFTWARE\\Wine" |
+
+
 
 ## <ins>Functionalities only availabe on Check</ins>
 
