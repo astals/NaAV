@@ -29,7 +29,7 @@ The Check option (naav.exe --check) allows you to detect in seconds if you have 
 | Guest Processes & Services | ~5 |
 | Analysis Tools Processes | ~40 |
 | Network Interfaces | -- |
-| Registry Keys | -- |
+| Registry Keys & ValueNames | -- |
 | Hardware Recognition Checks | -- |
 
 ## <ins>Basic usage</ins>
@@ -56,7 +56,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Fake Guest Files | Implemented | 0.1 |C:\\Program Files\\VMware\\VMware Tools\\* <br> C:\\Windows\\System32\\vm3d* <br> C:\\Windows\\System32\\vmGuestLib*<br> C:\\Windows\\System32\\vmhgfs.dll<br> C:\\Windows\\System32\\VMWSU.DLL|
 | Fake Guest Network Interfaces | WIP | 0.1 | |
 | Fake Guest Processes & Services| WIP | 0.1 | Defined in config file |
-| Fake Guest Registry Keys | WIP | 0.1 | |
+| Fake Guest Registry Keys & ValueNames | WIP | 0.1 | ~40 https://github.com/astals/NaAV/blob/main/modules/VMware/VMwareRegistry.go |
 
 ### Virtualbox Emulation
 |Functionality | Status | Version | Details|
@@ -65,7 +65,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Fake VirtualBox Guest Additions Files| Implemented | 0.1 | C:\\Program Files\\Oracle\\VirtualBox Guest Additions\\*<br> C:\\Windows\\System32\\VBox*<br> |
 | Fake Guest Network Interfaces | WIP | 0.1 | |
 | Fake Guest Processes & Services| WIP | 0.1 | Defined in config file |
-| Fake Guest Registry Keys | WIP | 0.1 | |
+| Fake Guest Registry Keys & ValueNames | WIP | 0.1 |  ~ 100 https://github.com/astals/NaAV/blob/main/modules/VirtualBox/VirtualBoxRegistry.go |
 
 ### Analysis Tools Emulation
 |Functionality | Status | Version | Details|
