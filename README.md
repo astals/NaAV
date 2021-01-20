@@ -29,7 +29,7 @@ The Check option (naav.exe --check) allows you to detect in seconds if you have 
 | Guest Processes & Services | ~5 |
 | Analysis Tools Processes | ~40 |
 | Network Interfaces | -- |
-| Registry Keys & ValueNames | -- |
+| Registry Keys & ValueNames | ~140 |
 | Hardware Recognition Checks | -- |
 
 ## <ins>Basic usage</ins>
