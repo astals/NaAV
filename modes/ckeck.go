@@ -12,4 +12,5 @@ func Check() {
 	VirtualBox.CheckVirtualBoxDrivers()
 	VirtualBox.CheckVirtualBoxGuestAdditionsFiles()
 	Others.CheckOtherRegistryKeys()
+	VirtualBox.CheckVirtualBoxFakeGuestNetworkInterface()
 }

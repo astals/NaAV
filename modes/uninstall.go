@@ -1,7 +1,7 @@
 package modes
 
 import (
-	"../modules/Others"
+	"../modules/VirtualBox"
 )
 
 func Uninstall() {
@@ -10,6 +10,7 @@ func Uninstall() {
 		VMware.UninstallVMwareGuestFiles()
 		VirtualBox.UninstallVirtualBoxDrivers()
 		VirtualBox.UninstallVirtualBoxGuestAdditionsFiles()
+		Others.UninstallOtherRegistryKeys()
 	*/
-	Others.UninstallOtherRegistryKeys()
+	VirtualBox.UninstallVirtualBoxFakeGuestNetworkInterface()
 }

@@ -13,15 +13,15 @@ import (
 
 type Configuration struct {
 	WMware struct {
-		FakeGuestDrivers           bool
-		FakeGuestFiles             bool
-		FakeGuestNetworkInterfaces bool
-		FakeProcesses              []string
+		FakeGuestDrivers          bool
+		FakeGuestFiles            bool
+		FakeGuestNetworkInterface bool
+		FakeProcesses             []string
 	}
 	VirtualBox struct {
 		FakeGuestDrivers                  bool
 		FakeVirtualBoxGuestAdditionsFiles bool
-		FakeGuestNetworkInterfaces        bool
+		FakeGuestNetworkInterface         bool
 		FakeProcesses                     []string
 	}
 	AnalysisTools struct {
@@ -49,6 +49,9 @@ func Install(ConfigFile string) {
 	}
 	if Config.VirtualBox.FakeVirtualBoxGuestAdditionsFiles {
 		VirtualBox.InstallVirtualBoxGuestAdditionsFiles()
+	}
+	if Config.VirtualBox.FakeGuestNetworkInterface {
+		VirtualBox.InstallVirtualBoxFakeGuestNetworkInterface()
 	}
 	if Config.OtherRegistryKeys {
 		Others.InstallOtherRegistryKeys()
