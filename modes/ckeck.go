@@ -1,7 +1,12 @@
 package modes
 
-func Check(ConfigFile string) {
+import (
+	"../modules"
+	"../utils"
+)
 
-	//modules.CheckGuestFiles(VMware.FakeGuestFiles, "VMware")
-	//modules.CheckGuestFiles(VMware.FakeGuestFiles, "VMware")
+func Check(ConfigFile string) {
+	Config := utils.ReadConfigFile(ConfigFile)
+	modules.CheckFiles(Config.VMware.Files, "guest files", "VMware")
+	modules.CheckFiles(Config.VirtualBox.Files, "guest files", "Virtual Box")
 }

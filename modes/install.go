@@ -9,10 +9,10 @@ import (
 )
 
 func Install(ConfigFile string) {
-	Config := modules.ReadConfigFile(ConfigFile)
+	Config := utils.ReadConfigFile(ConfigFile)
 	cloneInstallFiles(ConfigFile)
-	modules.InstallFiles(Config.VMware.PlatformData.Files, "guest files", "VMware")
-	modules.InstallFiles(Config.VirtualBox.PlatformData.Files, "guest files", "Virtual Box")
+	modules.InstallFiles(Config.VMware.Files, "guest files", "VMware")
+	modules.InstallFiles(Config.VirtualBox.Files, "guest files", "Virtual Box")
 }
 
 func cloneInstallFiles(ConfigFile string) {

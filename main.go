@@ -5,7 +5,6 @@ import (
 	"os"
 
 	"./modes"
-	"./modules"
 	"./utils"
 )
 
@@ -35,7 +34,7 @@ func main() {
 			return
 		}*/
 	}
-	ConfigFile := modules.GetConfigfile("")
+	ConfigFile := utils.GetConfigfile("")
 	if args[1] == "--check" {
 		modes.Check(ConfigFile)
 	}
