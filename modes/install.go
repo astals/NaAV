@@ -12,7 +12,9 @@ func Install(ConfigFile string) {
 	Config := utils.ReadConfigFile(ConfigFile)
 	cloneInstallFiles(ConfigFile)
 	modules.InstallFiles(Config.VMware.Files, "guest files", "VMware")
+	modules.InstallFiles(Config.VMware.Drivers, "drivers", "VMware")
 	modules.InstallFiles(Config.VirtualBox.Files, "guest files", "Virtual Box")
+	modules.InstallFiles(Config.VirtualBox.Drivers, "drivers", "Virtual Box")
 }
 
 func cloneInstallFiles(ConfigFile string) {

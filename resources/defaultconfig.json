@@ -71,7 +71,17 @@
     "Processes": []
   },
   "VMware": {
-    "Drivers": [],
+    "Drivers": [
+      "C:\\WINDOWS\\system32\\drivers\\vmmouse.sys.sys",
+      "C:\\WINDOWS\\system32\\drivers\\vmhgfs.sys",
+      "C:\\WINDOWS\\system32\\drivers\\vmrawdsk.sys",
+      "C:\\WINDOWS\\system32\\drivers\\vmmemctl.sys",
+      "C:\\WINDOWS\\system32\\drivers\\vmusbmouse.sys",
+      "C:\\WINDOWS\\system32\\drivers\\vm3dmp-debug.sys",
+      "C:\\WINDOWS\\system32\\drivers\\vm3dmp-stats.sys",
+      "C:\\WINDOWS\\system32\\drivers\\vm3dmp.sys",
+      "C:\\WINDOWS\\system32\\drivers\\vm3dmp_loader.sys"
+    ],
     "Files": [
       "C:\\Windows\\System32\\vm3dservice.exe",
       "C:\\Windows\\System32\\vm3dco.dll",
@@ -228,7 +238,12 @@
     ]
   },
   "VirtualBox": {
-    "Drivers": [],
+    "Drivers": [
+      "C:\\WINDOWS\\system32\\drivers\\VBoxGuest.sys",
+      "C:\\WINDOWS\\system32\\drivers\\VBoxMouse.sys",
+      "C:\\WINDOWS\\system32\\drivers\\VBoxSF.sys",
+      "C:\\WINDOWS\\system32\\drivers\\VBoxWddm.sys"
+    ],
     "Files": [
       "C:\\Program Files\\Oracle\\VirtualBox Guest Additions\\DIFxAPI.dll",
       "C:\\Program Files\\Oracle\\VirtualBox Guest Additions\\Oracle VM VirtualBox Guest Additions.url",
