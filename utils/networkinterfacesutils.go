@@ -19,7 +19,19 @@ Set-NetAdapter -Name "NaAV VBox" -MacAddress "08:00:27:e1:ee:e7" -Confirm:$false
 
 Remove-VMSwitch "NaAV VBox" -Confirm:$false
 */
+func CreateNetworkAdapters(adapters map[string]string, printPrepend string) {
+	okOperations := 0
+	for name, mac := range adapters {
+		err := CreateNetworkAdapter(name, mac, printPrepend)
+		if err == nil {
+			okOperations++
+		}
+	}
+	PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully performed %d of $d operations", printPrepend, okOperations, len(adapters)), SUMMARY_MESSAGE)
+
+}
 func CreateNetworkAdapter(name string, mac string, printPrepend string) error {
+	// TODO random mac adress if address already exists
 	targetinterface, err := GetTargetAdapterForVirtualSwitch()
 	if err != nil {
 		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-NU001 Error getting target adapter: %s", printPrepend, err), OPERATION_ERROR_MESSAGE)
@@ -42,6 +54,17 @@ func CreateNetworkAdapter(name string, mac string, printPrepend string) error {
 	}
 	return nil
 }
+func DeleteNetworkAdapters(adapters map[string]string, printPrepend string) {
+	okOperations := 0
+	for name, _ := range adapters {
+		err := DeleteNetworkAdapter(name, printPrepend)
+		if err == nil {
+			okOperations++
+		}
+	}
+	PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully performed %d of $d operations\n", printPrepend, okOperations, len(adapters)), SUMMARY_MESSAGE)
+}
+
 func DeleteNetworkAdapter(name string, printPrepend string) error {
 	_, err := exec.Command("powershell.exe", "-command", fmt.Sprintf("Remove-VMSwitch \"%s\" -Force", name)).Output()
 	if err != nil {
@@ -51,17 +74,26 @@ func DeleteNetworkAdapter(name string, printPrepend string) error {
 	return nil
 }
 
-func ExistsNetworkAdapter(mac string, printPrepend string) {
+func ExistsNetworkAdapters(adapters map[string]string, printPrepend string) {
+	detected := 0
+	for _, mac := range adapters {
+		if ExistsNetworkAdapter(mac, printPrepend) {
+			detected++
+		}
+	}
+	PrintIfEnoughLevel(fmt.Sprintf("%s [i] Detected %d of %d mac addresses \n", printPrepend, detected, len(adapters)), 0)
+}
+
+func ExistsNetworkAdapter(mac string, printPrepend string) bool {
 	addresses, err := GetMacAddresses()
 	if err != nil {
-		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-NU004 Error getting mac addresses: %s\n", printPrepend, err), OPERATION_ERROR_MESSAGE)
+		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-NU004 Error getting mac addresses: %s", printPrepend, err), OPERATION_ERROR_MESSAGE)
+		return false
 	}
 	if ElementInStringArray(mac, addresses) {
-		PrintIfEnoughLevel(fmt.Sprintf("%s [i] Detected %d of %d Network Adapters \n", printPrepend, 1, 1), SUMMARY_MESSAGE)
-	} else {
-		PrintIfEnoughLevel(fmt.Sprintf("%s [i] Detected %d of %d Network Adapters \n", printPrepend, 0, 1), SUMMARY_MESSAGE)
+		return true
 	}
-
+	return false
 }
 
 func GetMacAddresses() ([]string, error) {
@@ -72,6 +104,7 @@ func GetMacAddresses() ([]string, error) {
 	var addresses []string
 	for _, ifa := range ifaces {
 		address := ifa.HardwareAddr.String()
+		fmt.Print(address + "\n")
 		if address != "" {
 			addresses = append(addresses, address)
 		}

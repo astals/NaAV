@@ -1,16 +1,7 @@
 package modes
 
-import (
-	"../modules/Others"
-	"../modules/VMware"
-	"../modules/VirtualBox"
-)
+func Check(ConfigFile string) {
 
-func Check() {
-	VMware.CheckVMwareDrivers()
-	VMware.CheckVMwareGuestFiles()
-	VirtualBox.CheckVirtualBoxDrivers()
-	VirtualBox.CheckVirtualBoxGuestAdditionsFiles()
-	Others.CheckOtherRegistryKeys()
-	VirtualBox.CheckVirtualBoxFakeGuestNetworkInterface()
+	//modules.CheckGuestFiles(VMware.FakeGuestFiles, "VMware")
+	//modules.CheckGuestFiles(VMware.FakeGuestFiles, "VMware")
 }

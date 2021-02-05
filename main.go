@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"./modes"
+	"./modules"
 	"./utils"
 )
 
@@ -34,19 +35,15 @@ func main() {
 			return
 		}*/
 	}
+	ConfigFile := modules.GetConfigfile("")
 	if args[1] == "--check" {
-		modes.Check()
+		modes.Check(ConfigFile)
 	}
 	if args[1] == "--uninstall" {
-		modes.Uninstall()
+		modes.Uninstall(ConfigFile)
 	}
 	if args[1] == "--install" {
-		if len(args) < 3 {
-			fmt.Printf("This action requires a configuration file\n")
-			DisplayHelp()
-			return
-		}
-		modes.Install(args[2])
+		modes.Install(ConfigFile)
 	}
 	if args[1] != "-v" && args[1] != "--version" && args[1] != "-h" && args[1] != "--help" && args[1] != "--check" && args[1] != "--uninstall" && args[1] != "--install" {
 		fmt.Printf("Invalid option \n")

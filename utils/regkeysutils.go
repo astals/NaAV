@@ -37,7 +37,7 @@ func InstallRegkeys(regkeys map[string][]string, verbosityLevel int, printPrepen
 			okOperations++
 		}
 	}
-	PrintIfEnoughLevel(fmt.Sprintf("%s [i] Performed %d of %d operations\n", printPrepend, okOperations, okOperations+NokOperations), 0)
+	PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully performed %d of %d operations\n", printPrepend, okOperations, okOperations+NokOperations), 0)
 }
 
 func UninstallRegkeys(regkeys map[string][]string, verbosityLevel int, printPrepend string) {
@@ -86,7 +86,7 @@ func UninstallRegkeys(regkeys map[string][]string, verbosityLevel int, printPrep
 			okOperations++
 		}
 	}
-	PrintIfEnoughLevel(fmt.Sprintf("%s [i] Performed %d of %d operations\n", printPrepend, okOperations, okOperations+NokOperations), 0)
+	PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully performed %d of %d operations\n", printPrepend, okOperations, okOperations+NokOperations), 0)
 }
 
 func CheckTrees(trees []string, verbosityLevel int, printPrepend string) {
@@ -130,7 +130,7 @@ func SafePurgeTrees(trees []string, verbosityLevel int, printPrepend string) {
 			okOperations++
 		}
 	}
-	PrintIfEnoughLevel(fmt.Sprintf("%s [i] Performed %d of %d operations\n", printPrepend, okOperations, len(trees)), 0)
+	PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully performed %d of %d operations\n", printPrepend, okOperations, len(trees)), 0)
 }
 
 func CheckRegkeys(regkeys map[string][]string, verbosityLevel int, printPrepend string) {
