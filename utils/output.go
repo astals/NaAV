@@ -2,7 +2,7 @@ package utils
 
 import "fmt"
 
-var VerbosityLevel int //=1
+var VerbosityLevel int = 1
 
 // required vervosity levels
 const (
@@ -16,13 +16,14 @@ const (
 )
 
 func PrintIfEnoughLevel(printstring string, requiredMinLevel int) {
-	fmt.Print(printstring)
-	/*if VerbosityLevel >= requiredMinLevel {
+	if VerbosityLevel >= requiredMinLevel {
 		fmt.Print(printstring)
-	}*/
+	}
 
 }
 
-func SetVerbosityLevel() {
-	VerbosityLevel = 1
+/*
+func SetVerbosityLevel(level int) {
+	VerbosityLevel = level
 }
+*/

@@ -7,14 +7,18 @@ import (
 )
 
 type PlatformDataStruct struct {
-	Drivers           []string
-	Files             []string
+	Drivers  []string
+	Files    []string
+	Registry struct {
+		KeysAndValueNames      map[string][]string
+		OrderedKeysParentTrees []string // used for check and uninstall
+	}
 	NetworkInterfaces []string
 	Processes         []string
 }
 
 type Configuration struct {
-	AnalysisTools PlatformDataStruct
+	AnalysisTools []string
 	HyperV        PlatformDataStruct
 	Other         PlatformDataStruct
 	Parallels     PlatformDataStruct

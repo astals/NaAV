@@ -1,51 +1,49 @@
 {
-  "AnalysisTools": {
-    "Processes": [
-      "AccessEnum.exe",
-      "Autoruns.exe",
-      "Autoruns64.exe",
-      "Diskmon.exe",
-      "ImmunityDebugger.exe",
-      "LastActivityView.chm",
-      "LastActivityView.exe",
-      "NetworkMiner.exe",
-      "Procmon.exe",
-      "Procmon64.exe",
-      "PsService.exe",
-      "PsService64.exe",
-      "Pstools.chm",
-      "WinDbg.exe",
-      "Wireshark.exe",
-      "autoruns.chm",
-      "autorunsc.exe",
-      "autorunsc.exe",
-      "ida64.exe",
-      "idag.exe",
-      "idaq.exe",
-      "ollydbg.exe",
-      "procdump.exe",
-      "procdump64.exe",
-      "procexp.exe",
-      "procexp64.exe",
-      "pslist.exe",
-      "pslist64.exe",
-      "psloglist.exe",
-      "psloglist64.exe",
-      "python.exe",
-      "tcpview.chm",
-      "tcpview.exe",
-      "vmacthlp.exe",
-      "vmmap.exe",
-      "vmmap64.exe",
-      "volatility_2.6_win64_standalone.exe",
-      "yara.exe",
-      "yara32.exe",
-      "yara64.exe",
-      "yarac.exe",
-      "yarac32.exe",
-      "yarac64.exe"
-    ]
-  },
+  "AnalysisTools": [
+    "AccessEnum.exe",
+    "Autoruns.exe",
+    "Autoruns64.exe",
+    "Diskmon.exe",
+    "ImmunityDebugger.exe",
+    "LastActivityView.chm",
+    "LastActivityView.exe",
+    "NetworkMiner.exe",
+    "Procmon.exe",
+    "Procmon64.exe",
+    "PsService.exe",
+    "PsService64.exe",
+    "Pstools.chm",
+    "WinDbg.exe",
+    "Wireshark.exe",
+    "autoruns.chm",
+    "autorunsc.exe",
+    "autorunsc.exe",
+    "ida64.exe",
+    "idag.exe",
+    "idaq.exe",
+    "ollydbg.exe",
+    "procdump.exe",
+    "procdump64.exe",
+    "procexp.exe",
+    "procexp64.exe",
+    "pslist.exe",
+    "pslist64.exe",
+    "psloglist.exe",
+    "psloglist64.exe",
+    "python.exe",
+    "tcpview.chm",
+    "tcpview.exe",
+    "vmacthlp.exe",
+    "vmmap.exe",
+    "vmmap64.exe",
+    "volatility_2.6_win64_standalone.exe",
+    "yara.exe",
+    "yara32.exe",
+    "yara64.exe",
+    "yarac.exe",
+    "yarac32.exe",
+    "yarac64.exe"
+  ],
   "HyperV": {
     "Drivers": [],
     "Files": [],
@@ -235,7 +233,75 @@
       "vm3dservice",
       "vmtoolsd",
       "vmware-tray.exe"
-    ]
+    ],
+    "Registry": {
+      "KeysAndValueNames": {
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Applications\\VMwareHostOpen.exe\\shell\\open\\command": [],
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\VMwareHostOpen.AssocFile\\shell\\open\\command": [],
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\VMwareHostOpen.AssocURL\\shell\\open\\command": [],
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Clients\\StartMenuInternet\\VMWAREHOSTOPEN.EXE": [
+          "LocalizedString"
+        ],
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Clients\\StartMenuInternet\\VMWAREHOSTOPEN.EXE\\DefaultIcon": [],
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Clients\\StartMenuInternet\\VMWAREHOSTOPEN.EXE\\InstallInfo": [
+          "InstallInfo",
+          "InstallInfo",
+          "ReinstallCommand",
+          "ShowIconsCommand"
+        ],
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Clients\\StartMenuInternet\\VMWAREHOSTOPEN.EXE\\shell\\open\\command": [],
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Clients\\WOW6432Node\\StartMenuInternet\\VMWAREHOSTOPEN.EXE\\DefaultIcon": [],
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Clients\\WOW6432Node\\StartMenuInternet\\VMWAREHOSTOPEN.EXE\\InstallInfo": [
+          "InstallInfo",
+          "InstallInfo",
+          "ReinstallCommand",
+          "ShowIconsCommand"
+        ],
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Clients\\WOW6432Node\\StartMenuInternet\\VMWAREHOSTOPEN.EXE\\shell\\open\\command": [],
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Setup\\PnpResources\\Registry\\HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\VMware VM3DService Process": [
+          "Owners"
+        ],
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\VMware, Inc.\\VMware Drivers": [
+          "efifw.status",
+          "pvscsi.status",
+          "svga_wddm.status",
+          "vmci.status",
+          "VmciHostDevInst",
+          "vmhgfs.status",
+          "vmhgfs.status",
+          "vmmouse.status",
+          "vmrawdsk.status",
+          "vmusbmouse.status",
+          "vmxnet3.status",
+          "vsock.status",
+          "vsockDll.status",
+          "vsockSys.status"
+        ],
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Setup\\PnpResources\\Registry\\HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\VMware VM3DService Process": [
+          "Owners"
+        ],
+        "HKEY_USERS\\.DEFAULT\\Software\\VMware, Inc.\\VMware Tools\\Hgfs Usability\\MRU RootShare": [],
+        "HKEY_USERS\\S-1-5-18\\Software\\VMware, Inc.\\VMware Tools\\Hgfs Usability\\MRU RootShare": [],
+        "HKEY_USERS\\S-1-5-19\\Software\\VMware, Inc.\\VMware Tools\\Hgfs Usability\\MRU RootShare": [],
+        "HKEY_USERS\\S-1-5-20\\Software\\VMware, Inc.\\VMware Tools\\Hgfs Usability\\MRU RootShare": []
+      },
+      "OrderedKeysParentTrees": [
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Applications\\VMwareHostOpen.exe\\shell\\open",
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Applications\\VMwareHostOpen.exe\\shell",
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Applications\\VMwareHostOpen.exe",
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\VMwareHostOpen.AssocFile\\shell\\open",
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\VMwareHostOpen.AssocFile\\shell",
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\VMwareHostOpen.AssocFile",
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Clients\\StartMenuInternet\\VMWAREHOSTOPEN.EXE",
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\VMware, Inc.",
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Clients\\WOW6432Node\\StartMenuInternet\\VMWAREHOSTOPEN.EXE\\shell\\open",
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Clients\\WOW6432Node\\StartMenuInternet\\VMWAREHOSTOPEN.EXE\\shell",
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Clients\\WOW6432Node\\StartMenuInternet\\VMWAREHOSTOPEN.EXE",
+        "HKEY_USERS\\.DEFAULT\\Software\\VMware, Inc.\\VMware Tools\\Hgfs Usability\\",
+        "HKEY_USERS\\.DEFAULT\\Software\\VMware, Inc.\\VMware Tools",
+        "HKEY_USERS\\.DEFAULT\\Software\\VMware, Inc."
+      ]
+    }
   },
   "VirtualBox": {
     "Drivers": [
@@ -292,6 +358,139 @@
     "Processes": [
       "VBoxService.exe",
       "VBoxTray.exe"
-    ]
+    ],
+    "Registry": {
+      "KeysAndValueNames": {
+        "HKEY_LOCAL_MACHINE\\DRIVERS\\DriverDatabase\\DriverPackages\\vboxwddm.inf_amd64_203cd8905c42de56": [
+          "Version",
+          "Provider",
+          "InfName",
+          "OemPath",
+          "SignerName",
+          "ImportDate",
+          "Catalog",
+          "SignerScore",
+          "StatusFlags"
+        ],
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DIFx\\DriverStore\\VBoxMouse_45447C6D9465DAA979E8D56AA27CB5ADCE72EB96": [
+          "creation",
+          "type",
+          "INF",
+          "Services",
+          "ProductName",
+          "ManufacturerName",
+          "DisplayName",
+          "DependentInstaller",
+          "DependentInstallerName"
+        ],
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DIFx\\DriverStore\\vboxguest.inf_amd64_c4ea20f713fb03c4": [
+          "DependentInstaller",
+          "DependentInstallerName"
+        ],
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DIFx\\DriverStore\\vboxwddm.inf_amd64_203cd8905c42de56": [
+          "DependentInstaller",
+          "DependentInstallerName"
+        ],
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Oracle VM VirtualBox Guest Additions": [
+          "DisplayName",
+          "DisplayVersion",
+          "Publisher",
+          "UninstallString",
+          "URLInfoAbout"
+        ],
+        "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VBoxGuest": [
+          "Type",
+          "Start",
+          "ErrorControl",
+          "Tag",
+          "ImagePath",
+          "DisplayName",
+          "Group",
+          "Owners"
+        ],
+        "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VBoxGuest\\Enum": [
+          "0",
+          "Count",
+          "NextInstance"
+        ],
+        "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VBoxMouse": [
+          "Type",
+          "Start",
+          "DisplayName",
+          "ErrorControl",
+          "ImagePath"
+        ],
+        "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VBoxMouse\\DriverInfo": [
+          "RefCount"
+        ],
+        "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VBoxMouse\\Enum": [
+          "0",
+          "1",
+          "Count",
+          "NextInstance"
+        ],
+        "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VBoxSF": [
+          "Type",
+          "Start",
+          "ErrorControl",
+          "Tag",
+          "ImagePath",
+          "DisplayName",
+          "Group"
+        ],
+        "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VBoxSF\\NetworkProvider": [
+          "DeviceName",
+          "Name",
+          "ProviderPath"
+        ],
+        "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VBoxService": [
+          "Type",
+          "Start",
+          "ErrorControl",
+          "Tag",
+          "ImagePath",
+          "DisplayName",
+          "Group",
+          "ObjectName",
+          "Description"
+        ],
+        "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VBoxWddm": [
+          "Type",
+          "Start",
+          "ErrorControl",
+          "Tag",
+          "ImagePath",
+          "Group",
+          "Owners"
+        ],
+        "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VBoxWddm\\Enum": [
+          "0",
+          "Count",
+          "NextInstance"
+        ],
+        "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VBoxWddm\\Video": [
+          "Service",
+          "DeviceDesc",
+          "FeatureScore",
+          "VideoID"
+        ],
+        "HKEY_LOCAL_MACHINE\\SYSTEM\\DriverDatabase\\DriverPackages\\vboxguest.inf_amd64_c4ea20f713fb03c4": [
+          "Version",
+          "Provider",
+          "InfName",
+          "OemPath",
+          "SignerName",
+          "ImportDate",
+          "Catalog",
+          "SignerScore",
+          "StatusFlags"
+        ]
+      },
+      "OrderedKeysParentTrees": [
+        "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VBoxGuest",
+        "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VBoxMouse",
+        "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VBoxWddm"
+      ]
+    }
   }
 }

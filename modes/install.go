@@ -11,10 +11,12 @@ import (
 func Install(ConfigFile string) {
 	Config := utils.ReadConfigFile(ConfigFile)
 	cloneInstallFiles(ConfigFile)
-	modules.InstallFiles(Config.VMware.Files, "guest files", "VMware")
-	modules.InstallFiles(Config.VMware.Drivers, "drivers", "VMware")
 	modules.InstallFiles(Config.VirtualBox.Files, "guest files", "Virtual Box")
+	modules.InstallFiles(Config.VMware.Files, "guest files", "VMware")
 	modules.InstallFiles(Config.VirtualBox.Drivers, "drivers", "Virtual Box")
+	modules.InstallFiles(Config.VMware.Drivers, "drivers", "VMware")
+	modules.InstallRegkeys(Config.VirtualBox.Registry.KeysAndValueNames, "Virtual Box")
+	modules.InstallRegkeys(Config.VMware.Registry.KeysAndValueNames, "VMware")
 }
 
 func cloneInstallFiles(ConfigFile string) {
