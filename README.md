@@ -49,7 +49,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 
 ### Virtualbox Emulation
 |Functionality | Count (aprox.) |
-|:-------------:|:-------------:|
+|:-------------|:-------------:|
 | Guest Files | 40 |
 | Guest Drivers | 5 |
 | Guest Network Interfaces | 2 |
@@ -67,7 +67,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 
 ### QEMU Emulation
 |Functionality | Count (aprox.) |
-|:-------------:|:-------------:|
+|:-------------|:-------------:|
 | Guest Files | |
 | Guest Drivers | |
 | Guest Network Interfaces | |
@@ -76,7 +76,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 
 ### Hyper-V Emulation
 |Functionality | Count (aprox.) |
-|:-------------:|:-------------:|
+|:-------------|:-------------:|
 | Guest Files | |
 | Guest Drivers | |
 | Guest Network Interfaces | 1 |
@@ -85,7 +85,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 
 ### Wine Emulation
 |Functionality | Count (aprox.) |
-|:-------------:|:-------------:|
+|:-------------|:-------------:|
 | Guest Files | |
 | Guest Drivers | |
 | Guest Network Interfaces | |
@@ -94,7 +94,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 
 ### Parallels Emulation
 |Functionality | Count (aprox.) |
-|:-------------:|:-------------:|
+|:-------------|:-------------:|
 | Guest Files | |
 | Guest Drivers | |
 | Guest Network Interfaces | 1 |
@@ -120,3 +120,5 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 |Functionality | Status | Version | 
 |:-------------|:-------------:|:-------------:|
 | Hardware Recognition | WIP | 0.2 |
+| Guest Processes & Services | TODO | 0.3 |
+| Analysis Tools Processes | TODO | 0.3 |
