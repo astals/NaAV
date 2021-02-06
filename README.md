@@ -20,18 +20,6 @@ The Check option (naav.exe --check) allows you to detect in seconds if your sand
 
 The Check option (naav.exe --check) allows you to detect in seconds if you have landed on a poorly configured honeypot.
 
-## <ins>NaAV Numbers</ins>
-*with default config
-
-|Functionality | nº |
-|:-------------|:-------------:|
-| Guest Drivers & Files | ~200 |
-| Guest Processes & Services | ~5 |
-| Analysis Tools Processes | ~40 |
-| Network Interfaces | -- |
-| Registry Keys & ValueNames | ~140 |
-| Hardware Recognition Checks | -- |
-
 ## <ins>Basic usage</ins>
 naav.exe --install [configFile] -> Install, this action requires a configuration file, you can see an example on https://github.com/astals/NaAV/blob/main/config.json
 
@@ -48,39 +36,87 @@ naav.exe -h/--help -> Help
 naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 <img src="https://raw.githubusercontent.com/astals/NaAv/main/vebosityLevels.png" />
 
-## <ins>Install & Check Functionalities</ins>
-### VMware Emulation
-|Functionality | Status | Version | Details|
-|:-------------|:-------------:|:-------------:|:-------------|
-| Fake Guest Drivers | Implemented | 0.1 | C:\\WINDOWS\\system32\\drivers\\vm3dmp*<br> C:\\WINDOWS\\system32\\drivers\\vmhgfs.sys<br> C:\\WINDOWS\\system32\\drivers\\vmmouse.sys<br> C:\\WINDOWS\\system32\\drivers\\vmrawdsk.sys<br> C:\\WINDOWS\\system32\\drivers\\vmmemctl.sys<br> C:\\WINDOWS\\system32\\drivers\\vmusbmouse.sys|
-| Fake Guest Files | Implemented | 0.1 |C:\\Program Files\\VMware\\VMware Tools\\* <br> C:\\Windows\\System32\\vm3d* <br> C:\\Windows\\System32\\vmGuestLib*<br> C:\\Windows\\System32\\vmhgfs.dll<br> C:\\Windows\\System32\\VMWSU.DLL|
-| Fake Guest Network Interfaces | WIP | 0.1 | |
-| Fake Guest Processes & Services| WIP | 0.1 | Defined in config file |
-| Fake Guest Registry Keys & ValueNames | WIP | 0.1 | ~40 https://github.com/astals/NaAV/blob/main/modules/VMware/VMwareRegistry.go |
+## <ins>NaAV Numbers</ins>
+|Functionality | Count (aprox.) |
+|:-------------|:-------------:|
+| Guest Files | 180 |
+| Guest Drivers | 15 |
+| Guest Processes & Services | TODO |
+| Analysis Tools Processes | TODO |
+| Network Interfaces | 10 |
+| Registry Keys & ValueNames | 130 |
+| Hardware Recognition Checks | TODO |
 
 ### Virtualbox Emulation
-|Functionality | Status | Version | Details|
-|:-------------:|:-------------:|:-------------:|:-------------|
-| Fake Guest Drivers | Implemented | 0.1 | C:\\WINDOWS\\system32\\drivers\\VBox* |
-| Fake VirtualBox Guest Additions Files| Implemented | 0.1 | C:\\Program Files\\Oracle\\VirtualBox Guest Additions\\*<br> C:\\Windows\\System32\\VBox*<br> |
-| Fake Guest Network Interfaces | WIP | 0.1 | |
-| Fake Guest Processes & Services| WIP | 0.1 | Defined in config file |
-| Fake Guest Registry Keys & ValueNames | WIP | 0.1 |  ~ 100 https://github.com/astals/NaAV/blob/main/modules/VirtualBox/VirtualBoxRegistry.go |
+|Functionality | Count (aprox.) |
+|:-------------:|:-------------:|
+| Guest Files | 40 |
+| Guest Drivers | 5 |
+| Guest Network Interfaces | 2 |
+| Guest Processes & Services | |
+| Guest Registry Keys & ValueNames | 90 |
+
+### VMware Emulation
+|Functionality | Count (aprox.) |
+|:-------------|:-------------:|
+| Guest Files | 140 |
+| Guest Drivers | 10 |
+| Guest Network Interfaces | 4 |
+| Guest Processes & Services| |
+| Guest Registry Keys & ValueNames | 40 |
+
+### QEMU Emulation
+|Functionality | Count (aprox.) |
+|:-------------:|:-------------:|
+| Guest Files | |
+| Guest Drivers | |
+| Guest Network Interfaces | |
+| Guest Processes & Services| |
+| Guest Registry Keys & ValueNames | |
+
+### Hyper-V Emulation
+|Functionality | Count (aprox.) |
+|:-------------:|:-------------:|
+| Guest Files | |
+| Guest Drivers | |
+| Guest Network Interfaces | 1 |
+| Guest Processes & Services| |
+| Guest Registry Keys & ValueNames | |
+
+### Wine Emulation
+|Functionality | Count (aprox.) |
+|:-------------:|:-------------:|
+| Guest Files | |
+| Guest Drivers | |
+| Guest Network Interfaces | |
+| Guest Processes & Services| |
+| Guest Registry Keys & ValueNames | |
+
+### Parallels Emulation
+|Functionality | Count (aprox.) |
+|:-------------:|:-------------:|
+| Guest Files | |
+| Guest Drivers | |
+| Guest Network Interfaces | 1 |
+| Guest Processes & Services| |
+| Guest Registry Keys & ValueNames | |
 
 ### Analysis Tools Emulation
-|Functionality | Status | Version | Details|
-|:-------------|:-------------:|:-------------:|:-------------|
-| Fake Processes | WIP | 0.1 | ~40, defined in config file |
-
-### Others
-|Functionality | Status | Version | Details|
-|:-------------|:-------------:|:-------------:|:-------------|
-| Wine Registry Keys | WIP | 0.1 | "HKEY_CURRENT_USER\\SOFTWARE\\Wine" |
+|Functionality | Count (aprox.) |
+|:-------------|:-------------:|
+| Fake Processes | |
 
 
 
 ## <ins>Functionalities only availabe on Check</ins>
 
-|Functionality | Status | Version | Details|
-|:-------------|:-------------:|:-------------:|:-------------|
-| Hardware Recognition | WIP | 0.1 | CPU, RAM, HDD, etc |
+|Functionality | Count | 
+|:-------------|:-------------:|
+| Hardware Recognition | 0 |
+
+
+## <ins>Roadmap</ins>
+
+|Functionality | Status | Version | 
+|:-------------|:-------------:|:-------------:|
+| Hardware Recognition | WIP | 0.2 |
