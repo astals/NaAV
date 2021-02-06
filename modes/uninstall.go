@@ -15,4 +15,8 @@ func Uninstall(ConfigFile string) {
 	modules.UninstallParentTrees(Config.VirtualBox.Registry.OrderedKeysParentTrees)
 	modules.UninstallRegkeys(Config.VMware.Registry.KeysAndValueNames, "VMware")
 	modules.UninstallParentTrees(Config.VMware.Registry.OrderedKeysParentTrees)
+	modules.UninstallNetworkInterfaces(Config.VirtualBox.NetworkInterfaces, "Virtual Box")
+	modules.UninstallNetworkInterfaces(Config.VMware.NetworkInterfaces, "VMware")
+	modules.UninstallNetworkInterfaces(Config.HyperV.NetworkInterfaces, "Hyper-V")
+	modules.UninstallNetworkInterfaces(Config.Parallels.NetworkInterfaces, "Parallels")
 }

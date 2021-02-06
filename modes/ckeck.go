@@ -15,4 +15,8 @@ func Check(ConfigFile string) {
 	modules.CheckTrees(Config.VirtualBox.Registry.OrderedKeysParentTrees)
 	modules.CheckRegkeys(Config.VMware.Registry.KeysAndValueNames, "VMware")
 	modules.CheckTrees(Config.VMware.Registry.OrderedKeysParentTrees)
+	modules.CheckNetworkInterfaces(Config.VirtualBox.NetworkInterfaces, "Virtual Box")
+	modules.CheckNetworkInterfaces(Config.VMware.NetworkInterfaces, "VMware")
+	modules.CheckNetworkInterfaces(Config.HyperV.NetworkInterfaces, "Hyper-V")
+	modules.CheckNetworkInterfaces(Config.Parallels.NetworkInterfaces, "Parallels")
 }

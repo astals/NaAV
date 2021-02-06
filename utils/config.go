@@ -13,7 +13,7 @@ type PlatformDataStruct struct {
 		KeysAndValueNames      map[string][]string
 		OrderedKeysParentTrees []string // used for check and uninstall
 	}
-	NetworkInterfaces []string
+	NetworkInterfaces map[string]string
 	Processes         []string
 }
 

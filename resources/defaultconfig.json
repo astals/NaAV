@@ -47,25 +47,29 @@
   "HyperV": {
     "Drivers": [],
     "Files": [],
-    "NetworkInterfaces": [],
+    "NetworkInterfaces": {
+      "NaAV HyperV 1": "00:15:5d:e1:ee:e7"
+    },
     "Processes": []
   },
   "Other": {
     "Drivers": [],
     "Files": [],
-    "NetworkInterfaces": [],
+    "NetworkInterfaces": {},
     "Processes": []
   },
   "Parallels": {
     "Drivers": [],
     "Files": [],
-    "NetworkInterfaces": [],
+    "NetworkInterfaces": {
+      "NaAV Parallels 1": "00:1c:42:e1:ee:e7"
+    },
     "Processes": []
   },
   "QEMU": {
     "Drivers": [],
     "Files": [],
-    "NetworkInterfaces": [],
+    "NetworkInterfaces": {},
     "Processes": []
   },
   "VMware": {
@@ -227,7 +231,12 @@
       "C:\\Program Files\\VMware\\VMware Tools\\win64\\vmGuestLib.dll",
       "C:\\Program Files\\VMware\\VMware Tools\\win64\\vmGuestLibJava.dll"
     ],
-    "NetworkInterfaces": [],
+    "NetworkInterfaces": {
+      "NaAV VMware 1": "00:05:69:e1:ee:e7",
+      "NaAV VMware 2": "00:0c:29:e1:ee:e7",
+      "NaAV VMware 3": "00:1c:14:e1:ee:e7",
+      "NaAV VMware 4": "00:50:56:e1:ee:e7"
+    },
     "Processes": [
       "VGAuthService.exe",
       "vm3dservice",
@@ -354,7 +363,10 @@
       "C:\\Windows\\System32\\VBoxService.exe",
       "C:\\Windows\\System32\\VBoxTray.exe"
     ],
-    "NetworkInterfaces": [],
+    "NetworkInterfaces": {
+      "NaAV VBox 1": "08:00:27:e1:ee:e7",
+      "NaAV VBox 2": "0a:00:27:e1:ee:e7"
+    },
     "Processes": [
       "VBoxService.exe",
       "VBoxTray.exe"

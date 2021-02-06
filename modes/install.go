@@ -17,6 +17,10 @@ func Install(ConfigFile string) {
 	modules.InstallFiles(Config.VMware.Drivers, "drivers", "VMware")
 	modules.InstallRegkeys(Config.VirtualBox.Registry.KeysAndValueNames, "Virtual Box")
 	modules.InstallRegkeys(Config.VMware.Registry.KeysAndValueNames, "VMware")
+	modules.InstallNetworkInterfaces(Config.VirtualBox.NetworkInterfaces, "Virtual Box")
+	modules.InstallNetworkInterfaces(Config.VMware.NetworkInterfaces, "VMware")
+	modules.InstallNetworkInterfaces(Config.HyperV.NetworkInterfaces, "Hyper-V")
+	modules.InstallNetworkInterfaces(Config.Parallels.NetworkInterfaces, "Parallels")
 }
 
 func cloneInstallFiles(ConfigFile string) {
