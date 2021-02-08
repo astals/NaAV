@@ -119,6 +119,8 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 
 |Functionality | Status | Version | 
 |:-------------|:-------------:|:-------------:|
-| Hardware Recognition | WIP | 0.2 |
+| Hardware Recognition Checks | WIP | 0.2 |
 | Guest Processes & Services | TODO | 0.3 |
 | Analysis Tools Processes | TODO | 0.3 |
+| Hardware Recognition Hoks | Backlog | x.x |
+| Central management server | Backlog | x.x |

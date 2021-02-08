@@ -14,7 +14,7 @@ func InstallFiles(Files []string, VerboseFileTypeName string, VerbosePlatformNam
 	utils.PrintIfEnoughLevel(fmt.Sprintf("Creating %s %s:\n", VerbosePlatformName, VerboseFileTypeName), utils.BASIC_INFORMATION_MESSAGE)
 	okOperations := 0
 	for _, file := range Files {
-		err := utils.SafeCopy("resources\\dummy", file, "\t")
+		err := utils.SafeCopy("resources\\dummyfile", file, "\t")
 		if err == nil {
 			okOperations++
 		}

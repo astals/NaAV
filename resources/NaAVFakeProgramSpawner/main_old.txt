@@ -1,0 +1,69 @@
+/*
+package NaAVFakeProgramSpawner
+
+
+https://github.com/golang/sys/blob/master/windows/svc/example/service.go
+https://docs.microsoft.com/en-us/windows/win32/services/service-control-requests
+*/
+
+/*
+var elog debug.Log
+var ChildPids []int
+
+type myservice struct{}
+
+func (m *myservice) Execute(args []string, r <-chan svc.ChangeRequest, changes chan<- svc.Status) (ssec bool, errno uint32) {
+	const cmdsAccepted = svc.AcceptStop | svc.AcceptShutdown | svc.AcceptPauseAndContinue
+	changes <- svc.Status{State: svc.StartPending}
+	fasttick := time.Tick(500 * time.Millisecond)
+	slowtick := time.Tick(2 * time.Second)
+	tick := fasttick
+	changes <- svc.Status{State: svc.Running, Accepts: cmdsAccepted}
+	SpawnChilds()
+loop:
+	for {
+		select {
+		case <-tick:
+			elog.Info(1, "beep")
+		case c := <-r:
+			switch c.Cmd {
+			case svc.Interrogate:
+				changes <- c.CurrentStatus
+				time.Sleep(100 * time.Millisecond)
+				changes <- c.CurrentStatus
+			case svc.Stop, svc.Shutdown:
+				KillChilds()
+				testOutput := strings.Join(args, "-")
+				testOutput += fmt.Sprintf("-%d", c.Context)
+				elog.Info(1, testOutput)
+				break loop
+			case svc.Pause:
+				changes <- svc.Status{State: svc.Paused, Accepts: cmdsAccepted}
+				tick = slowtick
+			case svc.Continue:
+				changes <- svc.Status{State: svc.Running, Accepts: cmdsAccepted}
+				tick = fasttick
+			default:
+				elog.Error(1, fmt.Sprintf("unexpected control request #%d", c))
+			}
+		}
+	}
+	changes <- svc.Status{State: svc.StopPending}
+	return
+}
+
+func runService(_ string, isDebug bool) {
+	name := "NaAVFakeProgramSpawner"
+	elog.Info(1, fmt.Sprintf("starting %s service", name))
+	run := svc.Run
+	if isDebug {
+		run = debug.Run
+	}
+	err := run(name, &myservice{})
+	if err != nil {
+		elog.Error(1, fmt.Sprintf("%s service failed: %v", name, err))
+		return
+	}
+	elog.Info(1, fmt.Sprintf("%s service stopped", name))
+}
+*/
