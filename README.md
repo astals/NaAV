@@ -37,7 +37,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 <img src="https://raw.githubusercontent.com/astals/NaAv/main/vebosityLevels.png" />
 
 ## <ins>NaAV Numbers</ins>
-|Functionality | Count (aprox.) |
+|Functionality | Count (approx.) |
 |:-------------|:-------------:|
 | Guest Files | 180 |
 | Guest Drivers | 15 |
@@ -48,7 +48,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Hardware Recognition Checks | TODO |
 
 ### Virtualbox Emulation
-|Functionality | Count (aprox.) |
+|Functionality | Count (approx.) |
 |:-------------|:-------------:|
 | Guest Files | 40 |
 | Guest Drivers | 5 |
@@ -57,7 +57,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Guest Registry Keys & ValueNames | 90 |
 
 ### VMware Emulation
-|Functionality | Count (aprox.) |
+|Functionality | Count (approx.) |
 |:-------------|:-------------:|
 | Guest Files | 140 |
 | Guest Drivers | 10 |
@@ -66,7 +66,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Guest Registry Keys & ValueNames | 40 |
 
 ### QEMU Emulation
-|Functionality | Count (aprox.) |
+|Functionality | Count (approx.) |
 |:-------------|:-------------:|
 | Guest Files | |
 | Guest Drivers | |
@@ -75,7 +75,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Guest Registry Keys & ValueNames | |
 
 ### Hyper-V Emulation
-|Functionality | Count (aprox.) |
+|Functionality | Count (approx.) |
 |:-------------|:-------------:|
 | Guest Files | |
 | Guest Drivers | |
@@ -84,7 +84,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Guest Registry Keys & ValueNames | |
 
 ### Wine Emulation
-|Functionality | Count (aprox.) |
+|Functionality | Count (approx.) |
 |:-------------|:-------------:|
 | Guest Files | |
 | Guest Drivers | |
@@ -93,7 +93,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Guest Registry Keys & ValueNames | |
 
 ### Parallels Emulation
-|Functionality | Count (aprox.) |
+|Functionality | Count (approx.) |
 |:-------------|:-------------:|
 | Guest Files | |
 | Guest Drivers | |
@@ -102,7 +102,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Guest Registry Keys & ValueNames | |
 
 ### Analysis Tools Emulation
-|Functionality | Count (aprox.) |
+|Functionality | Count (approx.) |
 |:-------------|:-------------:|
 | Fake Processes | |
 

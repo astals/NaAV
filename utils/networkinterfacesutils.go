@@ -22,6 +22,7 @@ Remove-VMSwitch "NaAV VBox" -Confirm:$false
 
 func CreateNetworkAdapter(name string, mac string, printPrepend string) error {
 	// TODO random mac adress if address already exists
+	// TODO sanitaze input before calling powershell
 	out, err := exec.Command("powershell.exe", "-command", fmt.Sprintf("New-VMSwitch  -Name \"%s\" -SwitchType \"Internal\"", name)).Output()
 	if err != nil {
 		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-NU002 Error creting VMSwitch: %s\n", printPrepend, err), OPERATION_ERROR_MESSAGE)

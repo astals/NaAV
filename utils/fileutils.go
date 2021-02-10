@@ -51,7 +51,9 @@ func CopyFile(origin string, destination string) error {
 func FileExists(filename string) (bool, error) {
 	info, err := os.Stat(filename)
 	if os.IsNotExist(err) {
-		return false, err
+		return false, nil
+	} else if err != nil {
+		return false, nil
 	}
 	return !info.IsDir(), nil
 }

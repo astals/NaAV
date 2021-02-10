@@ -5,9 +5,6 @@ import (
 	"log"
 	"os"
 	"os/exec"
-	"os/user"
-	"strings"
-	"syscall"
 	"time"
 
 	"../../utils"
@@ -36,7 +33,7 @@ loop:
 	for {
 		select {
 		case <-tick:
-			elog.Info(1, "beep")
+
 		case c := <-r:
 			switch c.Cmd {
 			case svc.Interrogate:
@@ -47,9 +44,6 @@ loop:
 			case svc.Stop, svc.Shutdown:
 				// golang.org/x/sys/windows/svc.TestExample is verifying this output.
 				KillChilds()
-				testOutput := strings.Join(args, "-")
-				testOutput += fmt.Sprintf("-%d", c.Context)
-				elog.Info(1, testOutput)
 				break loop
 			case svc.Pause:
 				changes <- svc.Status{State: svc.Paused, Accepts: cmdsAccepted}
@@ -113,12 +107,9 @@ func SpawnChilds() {
 	all_processes = append(all_processes, Config.QEMU.Processes...)
 	all_processes = append(all_processes, Config.VMware.Processes...)
 	all_processes = append(all_processes, Config.VirtualBox.Processes...)
-	user, err := user.Current()
-	if err != nil {
-		elog.Error(1, fmt.Sprintf("error getting current user: %s", err))
-	}
+	utils.CreateFoldersPath("C:\\Program Files (x86)\\NaAV\\Temp")
 	for _, process := range all_processes {
-		target_file := fmt.Sprintf("%s\\AppData\\Local\\Temp\\%s", user.HomeDir, process)
+		target_file := fmt.Sprintf("C:\\Program Files (x86)\\NaAV\\Temp\\%s", process)
 		exists, err := utils.FileExists(target_file)
 		if err != nil {
 			elog.Error(1, fmt.Sprintf("error checking if file %s exists: %s", target_file, err))
@@ -135,9 +126,14 @@ func SpawnChilds() {
 			continue
 		}
 		cmd := exec.Command(target_file)
-		cmd.Start()
+		err = cmd.Start()
+		if err != nil {
+			elog.Error(1, fmt.Sprintf("error starting %s: %s", target_file, err))
+			continue
+		}
 		ChildPids = append(ChildPids, cmd.Process.Pid)
 	}
+	elog.Info(1, fmt.Sprintf("spawned %d childs", len(ChildPids)))
 }
 func KillChilds() {
 	for _, pid := range ChildPids {
@@ -145,8 +141,7 @@ func KillChilds() {
 		if err != nil {
 			elog.Error(1, fmt.Sprintf("error getting pid %d: %s", pid, err))
 		}
-		err = p.Signal(syscall.SIGTERM)
-		//err := syscall.Kill(pid, syscall.SIGKILL)
+		p.Kill()
 		if err != nil {
 			elog.Error(1, fmt.Sprintf("error killing pid %d: %s", pid, err))
 		}
