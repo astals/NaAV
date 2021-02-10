@@ -41,8 +41,8 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 |:-------------|:-------------:|
 | Guest Files | 180 |
 | Guest Drivers | 15 |
-| Guest Processes & Services | TODO |
-| Analysis Tools Processes | TODO |
+| Guest Processes | 5 |
+| Analysis Tools Processes | 45 |
 | Network Interfaces | 10 |
 | Registry Keys & ValueNames | 130 |
 | Hardware Recognition Checks | TODO |
@@ -53,7 +53,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Guest Files | 40 |
 | Guest Drivers | 5 |
 | Guest Network Interfaces | 2 |
-| Guest Processes & Services | |
+| Guest Processes | 2 |
 | Guest Registry Keys & ValueNames | 90 |
 
 ### VMware Emulation
@@ -62,7 +62,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Guest Files | 140 |
 | Guest Drivers | 10 |
 | Guest Network Interfaces | 4 |
-| Guest Processes & Services| |
+| Guest Processes| 4 |
 | Guest Registry Keys & ValueNames | 40 |
 
 ### QEMU Emulation
@@ -71,7 +71,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Guest Files | |
 | Guest Drivers | |
 | Guest Network Interfaces | |
-| Guest Processes & Services| |
+| Guest Processes| |
 | Guest Registry Keys & ValueNames | |
 
 ### Hyper-V Emulation
@@ -80,7 +80,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Guest Files | |
 | Guest Drivers | |
 | Guest Network Interfaces | 1 |
-| Guest Processes & Services| |
+| Guest Processes| |
 | Guest Registry Keys & ValueNames | |
 
 ### Wine Emulation
@@ -89,7 +89,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Guest Files | |
 | Guest Drivers | |
 | Guest Network Interfaces | |
-| Guest Processes & Services| |
+| Guest Processes| |
 | Guest Registry Keys & ValueNames | |
 
 ### Parallels Emulation
@@ -98,7 +98,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Guest Files | |
 | Guest Drivers | |
 | Guest Network Interfaces | 1 |
-| Guest Processes & Services| |
+| Guest Processes| |
 | Guest Registry Keys & ValueNames | |
 
 ### Analysis Tools Emulation
@@ -120,7 +120,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 |Functionality | Status | Version | 
 |:-------------|:-------------:|:-------------:|
 | Hardware Recognition Checks | WIP | 0.2 |
-| Guest Processes & Services | TODO | 0.3 |
+| Guest Processes | TODO | 0.3 |
 | Analysis Tools Processes | TODO | 0.3 |
 | Hardware Recognition Hoks | Backlog | x.x |
 | Central management server | Backlog | x.x |
