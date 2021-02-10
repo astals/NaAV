@@ -45,7 +45,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Analysis Tools Processes | 45 |
 | Network Interfaces | 10 |
 | Registry Keys & ValueNames | 130 |
-| Hardware Recognition Checks | TODO |
+| Hardware Recognition Checks & Hooks| TODO |
 
 ### Virtualbox Emulation
 |Functionality | Count (approx.) |
@@ -120,7 +120,5 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 |Functionality | Status | Version | 
 |:-------------|:-------------:|:-------------:|
 | Hardware Recognition Checks | WIP | 0.2 |
-| Guest Processes | TODO | 0.3 |
-| Analysis Tools Processes | TODO | 0.3 |
 | Hardware Recognition Hoks | Backlog | x.x |
 | Central management server | Backlog | x.x |
