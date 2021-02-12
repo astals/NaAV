@@ -20,6 +20,7 @@ type WindowsProcess struct {
 var servicename = "NaAVFakeProgramSpawner"
 
 func InstallFakeProgramService() {
+	//TODO evaluate startup folder
 	utils.PrintIfEnoughLevel("Installing NaAVFakeProgramSpawner service\n", utils.BASIC_INFORMATION_MESSAGE)
 	servicemanager, err := mgr.Connect()
 	defer servicemanager.Disconnect()

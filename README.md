@@ -104,7 +104,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 ### Analysis Tools Emulation
 |Functionality | Count (approx.) |
 |:-------------|:-------------:|
-| Fake Processes | |
+| Fake Processes | 45 |
 
 
 
