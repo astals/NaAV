@@ -47,7 +47,7 @@ func CreateNetworkAdapter(name string, mac string, printPrepend string) error {
 func DeleteNetworkAdapter(name string, printPrepend string) error {
 	_, err := exec.Command("powershell.exe", "-command", fmt.Sprintf("Remove-VMSwitch \"%s\" -Force", name)).Output()
 	if err != nil {
-		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-NU004 Error creting VMSwitch: %s\n", printPrepend, err), OPERATION_ERROR_MESSAGE)
+		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-NU004 Error deleting VMSwitch: %s\n", printPrepend, err), OPERATION_ERROR_MESSAGE)
 		return err
 	}
 	return nil

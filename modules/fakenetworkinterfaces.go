@@ -29,7 +29,11 @@ func UninstallNetworkInterfaces(adapters map[string]string, VerbosePlatformName 
 	}
 	utils.PrintIfEnoughLevel(fmt.Sprintf("Removing %s network interfaces:\n", VerbosePlatformName), utils.BASIC_INFORMATION_MESSAGE)
 	okOperations := 0
-	for name, _ := range adapters {
+	for name, mac := range adapters {
+		if !utils.ExistsNetworkAdapter(mac, "\t") {
+			okOperations++
+			continue
+		}
 		err := utils.DeleteNetworkAdapter(name, "\t")
 		if err == nil {
 			okOperations++

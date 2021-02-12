@@ -19,4 +19,5 @@ func Uninstall(ConfigFile string) {
 	modules.UninstallNetworkInterfaces(Config.VMware.NetworkInterfaces, "VMware")
 	modules.UninstallNetworkInterfaces(Config.HyperV.NetworkInterfaces, "Hyper-V")
 	modules.UninstallNetworkInterfaces(Config.Parallels.NetworkInterfaces, "Parallels")
+	modules.UninstallFakeProgramService()
 }

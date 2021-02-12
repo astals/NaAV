@@ -16,6 +16,7 @@ const (
 )
 
 func PrintIfEnoughLevel(printstring string, requiredMinLevel int) {
+	// TODO append \n at here
 	if VerbosityLevel >= requiredMinLevel {
 		fmt.Print(printstring)
 	}

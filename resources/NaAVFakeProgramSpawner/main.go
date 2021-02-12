@@ -1,5 +1,6 @@
 package main
 
+//https://github.com/golang/sys/blob/master/windows/svc/example/service.go
 import (
 	"fmt"
 	"log"
@@ -100,13 +101,9 @@ func runService(name string, isDebug bool) {
 }
 
 func SpawnChilds() {
+	// TODO, review event log
 	Config := utils.ReadConfigFile("C:\\Program Files (x86)\\NaAV\\config.json")
-	all_processes := append(Config.AnalysisTools, Config.HyperV.Processes...)
-	all_processes = append(all_processes, Config.Other.Processes...)
-	all_processes = append(all_processes, Config.Parallels.Processes...)
-	all_processes = append(all_processes, Config.QEMU.Processes...)
-	all_processes = append(all_processes, Config.VMware.Processes...)
-	all_processes = append(all_processes, Config.VirtualBox.Processes...)
+	all_processes := utils.JoinAllProgramNames(Config)
 	utils.CreateFoldersPath("C:\\Program Files (x86)\\NaAV\\Temp")
 	for _, process := range all_processes {
 		target_file := fmt.Sprintf("C:\\Program Files (x86)\\NaAV\\Temp\\%s", process)

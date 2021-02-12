@@ -52,3 +52,13 @@ func ReadConfigFile(ConfigFile string) Configuration {
 	}
 	return Config
 }
+
+func JoinAllProgramNames(config Configuration) []string {
+	all_processes := append(config.AnalysisTools, config.HyperV.Processes...)
+	all_processes = append(all_processes, config.Other.Processes...)
+	all_processes = append(all_processes, config.Parallels.Processes...)
+	all_processes = append(all_processes, config.QEMU.Processes...)
+	all_processes = append(all_processes, config.VMware.Processes...)
+	all_processes = append(all_processes, config.VirtualBox.Processes...)
+	return all_processes
+}
