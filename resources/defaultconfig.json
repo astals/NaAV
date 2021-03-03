@@ -504,5 +504,36 @@
         "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VBoxWddm"
       ]
     }
+  },
+  "Sandboxie": {
+    "Drivers": [],
+    "Files": [
+      "C:\\Program Files\\Sandboxie\\KmdUtil.exe",
+      "C:\\Program Files\\Sandboxie\\LICENSE.TXT",
+      "C:\\Program Files\\Sandboxie\\Manifest0.txt",
+      "C:\\Program Files\\Sandboxie\\Manifest1.txt",
+      "C:\\Program Files\\Sandboxie\\Manifest2.txt",
+      "C:\\Program Files\\Sandboxie\\QuickLaunch.lnk",
+      "C:\\Program Files\\Sandboxie\\SandboxieBITS.exe",
+      "C:\\Program Files\\Sandboxie\\SandboxieCrypto.exe",
+      "C:\\Program Files\\Sandboxie\\SandboxieDcomLaunch.exe",
+      "C:\\Program Files\\Sandboxie\\SandboxieRpcSs.exe",
+      "C:\\Program Files\\Sandboxie\\SandboxieWUAU.exe",
+      "C:\\Program Files\\Sandboxie\\SbieCtrl.exe",
+      "C:\\Program Files\\Sandboxie\\SbieDll.dll",
+      "C:\\Program Files\\Sandboxie\\SbieDrv.sys",
+      "C:\\Program Files\\Sandboxie\\SbieIni.exe",
+      "C:\\Program Files\\Sandboxie\\SbieMsg.dll",
+      "C:\\Program Files\\Sandboxie\\SbieSvc.exe",
+      "C:\\Program Files\\Sandboxie\\SboxHostDll.dll",
+      "C:\\Program Files\\Sandboxie\\Start.exe",
+      "C:\\Program Files\\Sandboxie\\Templates.ini",
+      "C:\\Program Files\\Sandboxie\\32\\SbieDll.dll",
+      "C:\\Program Files\\Sandboxie\\32\\SbieSvc.exe"],
+    "NetworkInterfaces": {
+      "NaAV HyperV 1": "00:15:5d:e1:ee:e7"
+    },
+    "Processes": ["SbieSvc.exe"]
   }
+    },
 }

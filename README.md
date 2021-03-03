@@ -39,7 +39,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 ## <ins>NaAV Numbers</ins>
 |Functionality | Count (approx.) |
 |:-------------|:-------------:|
-| Guest Files | 180 |
+| Guest Files | 200 |
 | Guest Drivers | 15 |
 | Guest Processes | 5 |
 | Analysis Tools Processes | 45 |
@@ -86,11 +86,11 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 ### Wine Emulation
 |Functionality | Count (approx.) |
 |:-------------|:-------------:|
-| Guest Files | |
-| Guest Drivers | |
-| Guest Network Interfaces | |
-| Guest Processes| |
-| Guest Registry Keys & ValueNames | |
+| Files | |
+| Drivers | |
+| Network Interfaces | |
+| Processes| |
+| Registry Keys & ValueNames | |
 
 ### Parallels Emulation
 |Functionality | Count (approx.) |
@@ -100,6 +100,15 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Guest Network Interfaces | 1 |
 | Guest Processes| |
 | Guest Registry Keys & ValueNames | |
+
+### Sandboxie Emulation
+|Functionality | Count (approx.) |
+|:-------------|:-------------:|
+| Files | 22 |
+| Drivers | |
+| Network Interfaces | |
+| Processes| 1 |
+| Registry Keys & ValueNames | |
 
 ### Analysis Tools Emulation
 |Functionality | Count (approx.) |

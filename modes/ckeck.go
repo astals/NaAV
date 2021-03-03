@@ -19,7 +19,7 @@ func Check(ConfigFile string) {
 	modules.CheckNetworkInterfaces(Config.VMware.NetworkInterfaces, "VMware")
 	modules.CheckNetworkInterfaces(Config.HyperV.NetworkInterfaces, "Hyper-V")
 	modules.CheckNetworkInterfaces(Config.Parallels.NetworkInterfaces, "Parallels")
-	modules.CheckFakeProgramService(Config.VirtualBox.Processes, "Virtual Box")
-	modules.CheckFakeProgramService(Config.VMware.Processes, "VMware")
-	modules.CheckFakeProgramService(Config.AnalysisTools, "Analysis Tools")
+	modules.CheckPrograms(Config.VirtualBox.Processes, "Virtual Box")
+	modules.CheckPrograms(Config.VMware.Processes, "VMware")
+	modules.CheckPrograms(Config.AnalysisTools, "Analysis Tools")
 }

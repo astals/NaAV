@@ -1,0 +1,13 @@
+IsDebugged
+NtGlobalFlags
+QueryInformationProcess
+CheckRemoteDebuggerPresent
+SetInformationThread
+DebugActiveProcess
+QueryPerformanceCounter
+GetTickCount
+OutputDebugString
+SetUnhandledExceptionFilter
+GenerateConsoleCtrlEvent
+SetConsoleCtrlHandler
+SetThreadContext

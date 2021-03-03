@@ -102,6 +102,7 @@ func runService(name string, isDebug bool) {
 
 func SpawnChilds() {
 	// TODO, review event log
+	// TODO, set Process name?
 	Config := utils.ReadConfigFile("C:\\Program Files (x86)\\NaAV\\config.json")
 	all_processes := utils.JoinAllProgramNames(Config)
 	utils.CreateFoldersPath("C:\\Program Files (x86)\\NaAV\\Temp")

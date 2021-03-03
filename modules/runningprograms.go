@@ -73,7 +73,7 @@ func UninstallFakeProgramService() {
 	utils.PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully removed %s service\n", "\t", servicename), utils.SUMMARY_MESSAGE)
 }
 
-func CheckFakeProgramService(processes []string, VerbosePlatformName string) {
+func CheckPrograms(processes []string, VerbosePlatformName string) {
 	utils.PrintIfEnoughLevel(fmt.Sprintf("Checking %s processes\n", VerbosePlatformName), utils.BASIC_INFORMATION_MESSAGE)
 	var runningProcessesNames []string
 	runningProcesses, err := GetRunningProcesses()
