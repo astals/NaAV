@@ -21,6 +21,7 @@ Remove-VMSwitch "NaAV VBox" -Confirm:$false
 */
 
 func CreateNetworkAdapter(name string, mac string, printPrepend string) error {
+	// TODO manage via wmi -> github.com/StackExchange/wmi
 	// TODO random mac adress if address already exists
 	// TODO sanitaze input before calling powershell
 	out, err := exec.Command("powershell.exe", "-command", fmt.Sprintf("New-VMSwitch  -Name \"%s\" -SwitchType \"Internal\"", name)).Output()
