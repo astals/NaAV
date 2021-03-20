@@ -30,5 +30,6 @@ func Check(ConfigFile string) {
 	modules.CheckNetworkInterfaces(Config.Parallels.NetworkInterfaces, "Parallels")
 
 	modules.CheckPrograms(Config.AnalysisTools, "Analysis Tools")
+	utils.PrintIfEnoughLevel("====> Hardware & System Checks <====\n", utils.BASIC_INFORMATION_MESSAGE)
 	modules.CheckHardware()
 }

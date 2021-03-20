@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 	"strings"
-
+	"strconv"
 	"github.com/StackExchange/wmi"
 )
 
@@ -27,18 +27,19 @@ type HardDrive struct {
 type CPU struct {
 	Caption string
 	Manufacturer string
-	MaxClockSpeed uint32
+	MaxClockSpeed int
 	Name string
 	Socket        string
 }
 type GPU struct {
 	Manufacturer         string
-	GPUName              string
-	RefreshRate          int
+	AdapterCompatibility string
+	Caption              string
+	Description	string
+	Name string
+	VideoProcessor string
 	HorizontalResolution int
 	VerticalResolution   int
-	Controller           string
-	PartNumber           string
 }
 type Mouse struct {
 	Caption string
@@ -58,7 +59,6 @@ type SystemInfo struct {
 		Version      string
 		Architecture string
 		InstallDate  time.Time
-		//debug shit
 	}
 	BIOS struct {
 		Manufacturer string 		
@@ -87,6 +87,96 @@ type SystemInfo struct {
 	}
 }
 
+func AppendIfSignificantlyPopulated(original string, printarray []string)string{
+	str :=""
+	for _, element := range printarray{
+			if ElementInStringArray(element, []string{"", " ", "Unknown","(Standard disk drives)","(Standard system devices)","Default string"}){
+				return original
+			}
+			str = str + element			
+		}
+	return original + str
+}
+
+func PrintHardwareInfo(systemInfo *SystemInfo) {
+	// RAM //
+	PrintIfEnoughLevelAndPropulated(AppendIfSignificantlyPopulated("", []string{"TotalRAM: ", strconv.Itoa(systemInfo.TotalRamGB)," GB\n"}),HARDWARE_RECOGNITION_MESSAGE)
+	for i, tmp := range systemInfo.RAM{
+		str := fmt.Sprintf("\tDimm %d -> ", i+1)
+		str = AppendIfSignificantlyPopulated(str,[]string{"Manufacturer: ", tmp.Manufacturer, ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Model: ", tmp.Model, ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Size: ", strconv.Itoa(tmp.Size)," GB, "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"PartNumber: ", tmp.PartNumber, ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Speed: ", strconv.Itoa(tmp.Speed), ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Voltage: ", strconv.Itoa(tmp.Voltage), ", "})
+		PrintIfEnoughLevel(fmt.Sprintf("%s \n",strings.Trim(str,", ")), HARDWARE_RECOGNITION_MESSAGE)
+	}
+	// STORAGE //
+	PrintIfEnoughLevelAndPropulated(AppendIfSignificantlyPopulated("", []string{"Total HardDrive Storage: ", strconv.Itoa(systemInfo.TotalDrivesGB)," GB\n"}),HARDWARE_RECOGNITION_MESSAGE)
+	for i, tmp := range systemInfo.HardDrives{
+		str := fmt.Sprintf("\tHDD %d -> ", i+1)
+		str = AppendIfSignificantlyPopulated(str,[]string{"Manufacturer: ", tmp.Manufacturer, ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Model: ", tmp.Model, ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Size: ", strconv.Itoa(tmp.Size)," GB, "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"SerialNumber: ", tmp.SerialNumber, ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Firmware: ", tmp.Firmware, ", "})
+		//str = AppendIfSignificantlyPopulated(str,[]string{"Partitions: ", strconv.Itoa(tmp.Partitions), ", "})
+		PrintIfEnoughLevel(fmt.Sprintf("%s \n",strings.Trim(str,", ")), HARDWARE_RECOGNITION_MESSAGE)
+	}
+
+	PrintIfEnoughLevelAndPropulated(AppendIfSignificantlyPopulated("", []string{"CPUs: ", strconv.Itoa(len(systemInfo.CPUs)),"\n"}),HARDWARE_RECOGNITION_MESSAGE)
+	for i, tmp := range systemInfo.CPUs{
+		str := fmt.Sprintf("\tCPU %d -> ", i+1)
+		str = AppendIfSignificantlyPopulated(str,[]string{"Manufacturer: ", tmp.Manufacturer, ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Caption: ", tmp.Caption, ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"MaxClockSpeed: ", strconv.Itoa(tmp.MaxClockSpeed), ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Name: ", tmp.Name, ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Socket: ", tmp.Socket, ", "})
+		PrintIfEnoughLevel(fmt.Sprintf("%s \n",strings.Trim(str,", ")), HARDWARE_RECOGNITION_MESSAGE)
+	}
+	PrintIfEnoughLevelAndPropulated(AppendIfSignificantlyPopulated("", []string{"GPUs: ", strconv.Itoa(len(systemInfo.CPUs)),"\n"}),HARDWARE_RECOGNITION_MESSAGE)
+	for i, tmp := range systemInfo.GPUs{
+		resolution :=""
+		if tmp.HorizontalResolution != 0 && tmp.VerticalResolution != 0 {
+			resolution = strconv.Itoa(tmp.HorizontalResolution) + "x" + strconv.Itoa(tmp.VerticalResolution)
+		}
+		str := fmt.Sprintf("\tGPU %d -> ", i+1)
+		str = AppendIfSignificantlyPopulated(str,[]string{"Manufacturer: ", tmp.Manufacturer, ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Caption: ", tmp.Caption, ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"AdapterCompatibility: ", tmp.AdapterCompatibility, ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Name: ", tmp.Name, ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"VideoProcessor: ", tmp.VideoProcessor, ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Description: ", tmp.Description, ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Resolution: ", resolution, ", "})
+		PrintIfEnoughLevel(fmt.Sprintf("%s \n",strings.Trim(str,", ")), HARDWARE_RECOGNITION_MESSAGE)
+	}
+	PrintIfEnoughLevelAndPropulated(AppendIfSignificantlyPopulated("", []string{"Mouses: ", strconv.Itoa(len(systemInfo.Mouses)),"\n"}),HARDWARE_RECOGNITION_MESSAGE)
+	for i, tmp := range systemInfo.Mouses{
+		str := fmt.Sprintf("\tMouse %d -> ", i+1)
+		str = AppendIfSignificantlyPopulated(str,[]string{"Manufacturer: ", tmp.Manufacturer,", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Caption: ", tmp.Caption,", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Description: ", tmp.Description,", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Name: ", tmp.Name,", "})
+		PrintIfEnoughLevel(fmt.Sprintf("%s \n",strings.Trim(str,", ")), HARDWARE_RECOGNITION_MESSAGE)
+	}
+	str := fmt.Sprintf("BIOS -> ")
+	str = AppendIfSignificantlyPopulated(str,[]string{"Manufacturer: ", systemInfo.BIOS.Manufacturer,", "})
+	str = AppendIfSignificantlyPopulated(str,[]string{"Name: ", systemInfo.BIOS.Name,", "})
+	str = AppendIfSignificantlyPopulated(str,[]string{"SerialNumber: ", systemInfo.BIOS.SerialNumber,", "})
+	str = AppendIfSignificantlyPopulated(str,[]string{"Version: ", systemInfo.BIOS.Version,", "})
+	PrintIfEnoughLevel(fmt.Sprintf("%s \n",strings.Trim(str,", ")), HARDWARE_RECOGNITION_MESSAGE)
+	str = fmt.Sprintf("MotherBoard -> ")
+	str = AppendIfSignificantlyPopulated(str,[]string{"Manufacturer: ", systemInfo.Motherboard.Manufacturer,", "})
+	str = AppendIfSignificantlyPopulated(str,[]string{"Product: ", systemInfo.Motherboard.Product,", "})
+	str = AppendIfSignificantlyPopulated(str,[]string{"Name: ", systemInfo.Motherboard.Name,", "})
+	str = AppendIfSignificantlyPopulated(str,[]string{"Model: ", systemInfo.Motherboard.Model,", "})
+	str = AppendIfSignificantlyPopulated(str,[]string{"SerialNumber: ", systemInfo.Motherboard.SerialNumber,", "})
+	str = AppendIfSignificantlyPopulated(str,[]string{"SKU: ", systemInfo.Motherboard.SKU,", "})	
+	PrintIfEnoughLevel(fmt.Sprintf("%s \n",strings.Trim(str,", ")), HARDWARE_RECOGNITION_MESSAGE)
+
+	
+
+}
 
 func PopulateRamInfo(systemInfo *SystemInfo) {
 	type Win32_PhysicalMemory struct {
@@ -137,6 +227,38 @@ func PopulateMouses(systemInfo *SystemInfo) {
 		systemInfo.Mouses = append(systemInfo.Mouses, tmp)
 	}
 }
+
+func PopulateGPUs(systemInfo *SystemInfo) {
+	type Win32_VideoController struct{
+		AdapterCompatibility string
+		Caption              string
+		Description	string
+		Name string
+		VideoProcessor string
+		CurrentHorizontalResolution uint32
+		CurrentVerticalResolution   uint32
+	}
+	// TODO, search more significant variables
+	var dst []Win32_VideoController
+	q := wmi.CreateQuery(&dst, "")
+	err := wmi.Query(q, &dst)
+	// TODO: handle err
+	fmt.Print(err)
+	for _, element := range dst {
+		var tmp GPU
+		//tmp.Manufacturer = element.Manufacturer
+		tmp.AdapterCompatibility = element.AdapterCompatibility
+		tmp.Caption = element.Caption
+		tmp.Description = element.Description
+		tmp.Name = element.Name
+		tmp.VideoProcessor = element.VideoProcessor
+		tmp.HorizontalResolution = int(element.CurrentHorizontalResolution)
+		tmp.VerticalResolution = int(element.CurrentVerticalResolution)
+		systemInfo.GPUs = append(systemInfo.GPUs, tmp)
+	}
+}
+
+
 func PopulateHardDrivesInfo(systemInfo *SystemInfo) {
 	type Win32_DiskDrive struct {
 		Manufacturer string
@@ -150,7 +272,6 @@ func PopulateHardDrivesInfo(systemInfo *SystemInfo) {
 	q := wmi.CreateQuery(&dst, "")
 	err := wmi.Query(q, &dst)
 	// TODO: handle err
-	fmt.Print(q)
 	fmt.Print(err)
 	systemInfo.TotalDrivesGB = 0
 	for _, element := range dst {
@@ -183,7 +304,7 @@ func PopulateCPUsInfo(systemInfo *SystemInfo){
 		var tmp CPU
 		tmp.Caption = element.Caption
 		tmp.Manufacturer = element.Manufacturer
-		tmp.MaxClockSpeed = element.MaxClockSpeed
+		tmp.MaxClockSpeed = int(element.MaxClockSpeed)
 		tmp.Name = strings.Trim(element.Name," ")
 		systemInfo.CPUs = append(systemInfo.CPUs, tmp)
 	}

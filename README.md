@@ -45,7 +45,7 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 | Analysis Tools Processes | 45 |
 | Network Interfaces | 10 |
 | Registry Keys & ValueNames | 130 |
-| Hardware Recognition Checks & Hooks| TODO |
+| Hardware Recognition Checks | 70 |
 
 ### Virtualbox Emulation
 |Functionality | Count (approx.) |
@@ -68,47 +68,28 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 ### QEMU Emulation
 |Functionality | Count (approx.) |
 |:-------------|:-------------:|
-| Guest Files | |
-| Guest Drivers | |
-| Guest Network Interfaces | |
-| Guest Processes| |
-| Guest Registry Keys & ValueNames | |
 
 ### Hyper-V Emulation
 |Functionality | Count (approx.) |
 |:-------------|:-------------:|
-| Guest Files | |
-| Guest Drivers | |
 | Guest Network Interfaces | 1 |
-| Guest Processes| |
-| Guest Registry Keys & ValueNames | |
 
 ### Wine Emulation
 |Functionality | Count (approx.) |
 |:-------------|:-------------:|
-| Files | |
-| Drivers | |
-| Network Interfaces | |
-| Processes| |
-| Registry Keys & ValueNames | |
+
 
 ### Parallels Emulation
 |Functionality | Count (approx.) |
 |:-------------|:-------------:|
-| Guest Files | |
-| Guest Drivers | |
 | Guest Network Interfaces | 1 |
-| Guest Processes| |
-| Guest Registry Keys & ValueNames | |
+
 
 ### Sandboxie Emulation
 |Functionality | Count (approx.) |
 |:-------------|:-------------:|
 | Files | 22 |
-| Drivers | |
-| Network Interfaces | |
 | Processes| 1 |
-| Registry Keys & ValueNames | |
 
 ### Analysis Tools Emulation
 |Functionality | Count (approx.) |
@@ -128,6 +109,6 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 
 |Functionality | Status | Version | 
 |:-------------|:-------------:|:-------------:|
-| Hardware Recognition Checks | WIP | 0.2 |
+| Output in Json format| Backlog | x.x |
 | Hardware Recognition Hoks | Backlog | x.x |
 | Central management server | Backlog | x.x |
