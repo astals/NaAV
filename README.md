@@ -96,15 +96,6 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 |:-------------|:-------------:|
 | Fake Processes | 45 |
 
-
-
-## <ins>Functionalities only availabe on Check</ins>
-
-|Functionality | Count | 
-|:-------------|:-------------:|
-| Hardware Recognition | 0 |
-
-
 ## <ins>Roadmap</ins>
 
 |Functionality | Status | Version | 
