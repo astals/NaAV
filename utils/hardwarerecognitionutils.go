@@ -48,13 +48,30 @@ type Mouse struct {
 	Name string
 }
 
+type User struct {
+	Name string
+	Domain string
+	Caption string
+	SID	string
+	AccountType int
+}
+type CDROM struct{
+	Caption string
+	Drive string
+	Manufacturer string 
+}
+type OnBoardDevice struct{
+	DeviceType int
+	SerialNumber string
+	Description string
+}
 type SystemInfo struct {
-	users          []string
-	LastBootUpTime time.Time
+	Users          []User
+	Uptime time.Time //TODO (incorrect value returned by WMI)
 	TotalRamGB     int
 	RAM            []RAMDimm
-	SwapSize       int
 	OS             struct {
+		// TODO (no relevant info observed at iteration 1)
 		Name         string
 		Version      string
 		Architecture string
@@ -66,25 +83,39 @@ type SystemInfo struct {
 		SerialNumber string
 		Version string 
 	}
-	Motherboard struct {
+	MotherBoard struct {
 		Manufacturer string
 		Model        string
 		Name         string
 		SerialNumber string
 		SKU          string
 		Product      string
+		OnBoardDevices []OnBoardDevice
 	}
 	TotalDrivesGB int
 	HardDrives    []HardDrive
 	CPUs          []CPU
 	GPUs          []GPU
 	Monitors      []struct {
+		//TODO (no relevant info observed at iteration 1)
 	}
 	Keyboards []struct {
+		//TODO (no relevant info observed at iteration 1)
 	}
 	Mouses []Mouse
 	AudioOutput []struct {
+		//TODO (no relevant info observed at iteration 1)
 	}
+	SystemEnclosure []struct {
+		//TODO (no relevant info observed at iteration 1)
+	}
+	PowerSupply []struct {
+		//TODO (no relevant info observed at iteration 1)
+	}
+	USBControllers []struct {
+		//TODO (no relevant info observed at iteration 1)
+	}
+	CDROMs []CDROM
 }
 
 func AppendIfSignificantlyPopulated(original string, printarray []string)string{
@@ -159,23 +190,46 @@ func PrintHardwareInfo(systemInfo *SystemInfo) {
 		str = AppendIfSignificantlyPopulated(str,[]string{"Name: ", tmp.Name,", "})
 		PrintIfEnoughLevel(fmt.Sprintf("%s \n",strings.Trim(str,", ")), HARDWARE_RECOGNITION_MESSAGE)
 	}
-	str := fmt.Sprintf("BIOS -> ")
+	PrintIfEnoughLevelAndPropulated(AppendIfSignificantlyPopulated("", []string{"Users: ", strconv.Itoa(len(systemInfo.Users)),"\n"}),HARDWARE_RECOGNITION_MESSAGE)
+	for i, tmp := range systemInfo.Users{
+		str := fmt.Sprintf("\tUser %d -> ", i+1)
+		str = AppendIfSignificantlyPopulated(str,[]string{"Name: ", tmp.Name,", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Domain: ", tmp.Domain,", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Caption: ", tmp.Caption,", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"AccountType: ", strconv.Itoa(tmp.AccountType), ", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"SID: ", tmp.SID,", "})
+		PrintIfEnoughLevel(fmt.Sprintf("%s \n",strings.Trim(str,", ")), HARDWARE_RECOGNITION_MESSAGE)
+	}
+	PrintIfEnoughLevelAndPropulated(AppendIfSignificantlyPopulated("", []string{"CDROMs: ", strconv.Itoa(len(systemInfo.CDROMs)),"\n"}),HARDWARE_RECOGNITION_MESSAGE)
+	for i, tmp := range systemInfo.CDROMs{
+		str := fmt.Sprintf("\tCDROM %d -> ", i+1)
+		str = AppendIfSignificantlyPopulated(str,[]string{"Manufacturer: ", tmp.Manufacturer,", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Caption: ", tmp.Caption,", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Drive: ", tmp.Drive,", "})
+		PrintIfEnoughLevel(fmt.Sprintf("%s \n",strings.Trim(str,", ")), HARDWARE_RECOGNITION_MESSAGE)
+	}
+	str := fmt.Sprintf("MotherBoard -> ")
+	str = AppendIfSignificantlyPopulated(str,[]string{"Manufacturer: ", systemInfo.MotherBoard.Manufacturer,", "})
+	str = AppendIfSignificantlyPopulated(str,[]string{"Product: ", systemInfo.MotherBoard.Product,", "})
+	str = AppendIfSignificantlyPopulated(str,[]string{"Name: ", systemInfo.MotherBoard.Name,", "})
+	str = AppendIfSignificantlyPopulated(str,[]string{"Model: ", systemInfo.MotherBoard.Model,", "})
+	str = AppendIfSignificantlyPopulated(str,[]string{"SerialNumber: ", systemInfo.MotherBoard.SerialNumber,", "})
+	str = AppendIfSignificantlyPopulated(str,[]string{"SKU: ", systemInfo.MotherBoard.SKU,", "})	
+	PrintIfEnoughLevel(fmt.Sprintf("%s \n",strings.Trim(str,", ")), HARDWARE_RECOGNITION_MESSAGE)
+	for i, tmp := range systemInfo.MotherBoard.OnBoardDevices{
+		str := fmt.Sprintf("\tOnBoardDevice %d -> ", i+1)
+		str = AppendIfSignificantlyPopulated(str,[]string{"DeviceType: ", strconv.Itoa(tmp.DeviceType),", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"SerialNumber: ", tmp.SerialNumber,", "})
+		str = AppendIfSignificantlyPopulated(str,[]string{"Description: ", tmp.Description,", "})
+		PrintIfEnoughLevel(fmt.Sprintf("%s \n",strings.Trim(str,", ")), HARDWARE_RECOGNITION_MESSAGE)
+	}
+	str = fmt.Sprintf("BIOS -> ")
 	str = AppendIfSignificantlyPopulated(str,[]string{"Manufacturer: ", systemInfo.BIOS.Manufacturer,", "})
 	str = AppendIfSignificantlyPopulated(str,[]string{"Name: ", systemInfo.BIOS.Name,", "})
 	str = AppendIfSignificantlyPopulated(str,[]string{"SerialNumber: ", systemInfo.BIOS.SerialNumber,", "})
 	str = AppendIfSignificantlyPopulated(str,[]string{"Version: ", systemInfo.BIOS.Version,", "})
 	PrintIfEnoughLevel(fmt.Sprintf("%s \n",strings.Trim(str,", ")), HARDWARE_RECOGNITION_MESSAGE)
-	str = fmt.Sprintf("MotherBoard -> ")
-	str = AppendIfSignificantlyPopulated(str,[]string{"Manufacturer: ", systemInfo.Motherboard.Manufacturer,", "})
-	str = AppendIfSignificantlyPopulated(str,[]string{"Product: ", systemInfo.Motherboard.Product,", "})
-	str = AppendIfSignificantlyPopulated(str,[]string{"Name: ", systemInfo.Motherboard.Name,", "})
-	str = AppendIfSignificantlyPopulated(str,[]string{"Model: ", systemInfo.Motherboard.Model,", "})
-	str = AppendIfSignificantlyPopulated(str,[]string{"SerialNumber: ", systemInfo.Motherboard.SerialNumber,", "})
-	str = AppendIfSignificantlyPopulated(str,[]string{"SKU: ", systemInfo.Motherboard.SKU,", "})	
-	PrintIfEnoughLevel(fmt.Sprintf("%s \n",strings.Trim(str,", ")), HARDWARE_RECOGNITION_MESSAGE)
-
 	
-
 }
 
 func PopulateRamInfo(systemInfo *SystemInfo) {
@@ -190,8 +244,9 @@ func PopulateRamInfo(systemInfo *SystemInfo) {
 	var dst []Win32_PhysicalMemory
 	q := wmi.CreateQuery(&dst, "")
 	err := wmi.Query(q, &dst)
-	// TODO: handle err
-	fmt.Print(err)
+	if err != nil {
+		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-HU001 Error querying WMI: %s\n", "", err), OPERATION_ERROR_MESSAGE)
+	}
 	systemInfo.TotalRamGB = 0
 	for _, element := range dst {
 		var tmp RAMDimm
@@ -216,8 +271,9 @@ func PopulateMouses(systemInfo *SystemInfo) {
 	var dst []Win32_PointingDevice
 	q := wmi.CreateQuery(&dst, "")
 	err := wmi.Query(q, &dst)
-	// TODO: handle err
-	fmt.Print(err)
+	if err != nil {
+		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-HU002 Error querying WMI: %s\n", "", err), OPERATION_ERROR_MESSAGE)
+	}
 	for _, element := range dst {
 		var tmp Mouse
 		tmp.Caption = element.Caption
@@ -225,6 +281,54 @@ func PopulateMouses(systemInfo *SystemInfo) {
 		tmp.Manufacturer = element.Manufacturer
 		tmp.Name = element.Name
 		systemInfo.Mouses = append(systemInfo.Mouses, tmp)
+	}
+}
+
+func PopulateUsers(systemInfo *SystemInfo) {
+	type Win32_UserAccount struct{
+		Name string
+		Domain string
+		Caption string
+		SID	string
+		AccountType uint32
+	}
+	// TODO, search more significant variables
+	var dst []Win32_UserAccount
+	q := wmi.CreateQuery(&dst, "")
+	err := wmi.Query(q, &dst)
+	if err != nil {
+		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-HU003 Error querying WMI: %s\n", "", err), OPERATION_ERROR_MESSAGE)
+	}
+	for _, element := range dst {
+		var tmp User
+		tmp.Name = element.Name
+		tmp.Domain = element.Domain
+		tmp.Caption = element.Caption
+		tmp.SID = element.SID
+		tmp.AccountType = int(element.AccountType)
+		systemInfo.Users = append(systemInfo.Users, tmp)
+	}
+}
+
+func PopulateCDROMs(systemInfo *SystemInfo) {
+	type Win32_CDROMDrive struct{
+		Caption string
+		Drive string
+		Manufacturer string 
+	}
+	// TODO, search more significant variables
+	var dst []Win32_CDROMDrive
+	q := wmi.CreateQuery(&dst, "")
+	err := wmi.Query(q, &dst)
+	if err != nil {
+		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-HU004 Error querying WMI: %s\n", "", err), OPERATION_ERROR_MESSAGE)
+	}
+	for _, element := range dst {
+		var tmp CDROM
+		tmp.Drive = element.Drive
+		tmp.Manufacturer = element.Manufacturer
+		tmp.Caption = element.Caption
+		systemInfo.CDROMs = append(systemInfo.CDROMs, tmp)
 	}
 }
 
@@ -242,8 +346,9 @@ func PopulateGPUs(systemInfo *SystemInfo) {
 	var dst []Win32_VideoController
 	q := wmi.CreateQuery(&dst, "")
 	err := wmi.Query(q, &dst)
-	// TODO: handle err
-	fmt.Print(err)
+	if err != nil {
+		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-HU005 Error querying WMI: %s\n", "", err), OPERATION_ERROR_MESSAGE)
+	}
 	for _, element := range dst {
 		var tmp GPU
 		//tmp.Manufacturer = element.Manufacturer
@@ -271,8 +376,9 @@ func PopulateHardDrivesInfo(systemInfo *SystemInfo) {
 	var dst []Win32_DiskDrive
 	q := wmi.CreateQuery(&dst, "")
 	err := wmi.Query(q, &dst)
-	// TODO: handle err
-	fmt.Print(err)
+	if err != nil {
+		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-HU006 Error querying WMI: %s\n", "", err), OPERATION_ERROR_MESSAGE)
+	}
 	systemInfo.TotalDrivesGB = 0
 	for _, element := range dst {
 		var tmp HardDrive
@@ -298,8 +404,9 @@ func PopulateCPUsInfo(systemInfo *SystemInfo){
 	var dst []Win32_Processor
 	q := wmi.CreateQuery(&dst, "")
 	err := wmi.Query(q, &dst)
-	// TODO: handle err
-	fmt.Print(err)
+	if err != nil {
+		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-HU007 Error querying WMI: %s\n", "", err), OPERATION_ERROR_MESSAGE)
+	}
 	for _, element := range dst {
 		var tmp CPU
 		tmp.Caption = element.Caption
@@ -320,14 +427,14 @@ func PopulateHardBIOSInfo(systemInfo *SystemInfo){
 	var dst []CIM_BIOSElement
 	q := wmi.CreateQuery(&dst, "")
 	err := wmi.Query(q, &dst)
-	fmt.Print(err)
-	// TODO handle err
+	if err != nil {
+		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-HU008 Error querying WMI: %s\n", "", err), OPERATION_ERROR_MESSAGE)
+	}
 	systemInfo.BIOS.Manufacturer=dst[0].Manufacturer
 	systemInfo.BIOS.Name=dst[0].Name
 	systemInfo.BIOS.SerialNumber=dst[0].SerialNumber
 	systemInfo.BIOS.Version=dst[0].Version
 }
-
 
 func PopulateMotherBoardInfo(systemInfo *SystemInfo){
 	type Win32_BaseBoard struct {
@@ -338,17 +445,35 @@ func PopulateMotherBoardInfo(systemInfo *SystemInfo){
 		SKU          string
 		Product      string
 	}
+	type Win32_OnboardDevice struct{
+		DeviceType int
+		SerialNumber string
+		Description string
+	}
 	var dst []Win32_BaseBoard
 	q := wmi.CreateQuery(&dst, "")
 	err := wmi.Query(q, &dst)
-	fmt.Print(err)
-	systemInfo.Motherboard.Manufacturer=dst[0].Manufacturer
-	systemInfo.Motherboard.Model=dst[0].Model
-	systemInfo.Motherboard.Name=dst[0].Name
-	systemInfo.Motherboard.SerialNumber=dst[0].SerialNumber
-	systemInfo.Motherboard.SKU=dst[0].SKU
-	systemInfo.Motherboard.Product=dst[0].Product
+	if err != nil {
+		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-HU009 Error querying WMI: %s\n", "", err), OPERATION_ERROR_MESSAGE)
+	}
+	systemInfo.MotherBoard.Manufacturer=dst[0].Manufacturer
+	systemInfo.MotherBoard.Model=dst[0].Model
+	systemInfo.MotherBoard.Name=dst[0].Name
+	systemInfo.MotherBoard.SerialNumber=dst[0].SerialNumber
+	systemInfo.MotherBoard.SKU=dst[0].SKU
+	systemInfo.MotherBoard.Product=dst[0].Product
+	// ON board Devices
+	var dst2 []Win32_OnboardDevice
+	q = wmi.CreateQuery(&dst2, "")
+	err = wmi.Query(q, &dst2)
+	if err != nil {
+		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-HU010 Error querying WMI: %s\n", "", err), OPERATION_ERROR_MESSAGE)
+	}
+	for _, element := range dst2 {
+		var tmp OnBoardDevice
+		tmp.SerialNumber = element.SerialNumber
+		tmp.Description = element.Description
+		tmp.DeviceType = element.DeviceType
+		systemInfo.MotherBoard.OnBoardDevices = append(systemInfo.MotherBoard.OnBoardDevices, tmp)
+	}
 }
-
-
-

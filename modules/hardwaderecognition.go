@@ -25,5 +25,7 @@ func CheckHardware() {
 	utils.PopulateCPUsInfo(&systemInfo)
 	utils.PopulateMouses(&systemInfo)
 	utils.PopulateGPUs(&systemInfo)
+	utils.PopulateUsers(&systemInfo)
+	utils.PopulateCDROMs(&systemInfo)	
 	utils.PrintHardwareInfo(&systemInfo)
 }
