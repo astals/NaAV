@@ -17,15 +17,19 @@ func Install(ConfigFile string) {
 	modules.InstallFiles(Config.VirtualBox.Drivers, "drivers", "Virtual Box")
 	modules.InstallRegkeys(Config.VirtualBox.Registry.KeysAndValueNames, "Virtual Box")
 	modules.InstallNetworkInterfaces(Config.VirtualBox.NetworkInterfaces, "Virtual Box")
+	
 	utils.PrintIfEnoughLevel("=====> VMware <=====\n", utils.BASIC_INFORMATION_MESSAGE)
 	modules.InstallFiles(Config.VMware.Files, "guest files", "VMware")
 	modules.InstallFiles(Config.VMware.Drivers, "drivers", "VMware")
 	modules.InstallRegkeys(Config.VMware.Registry.KeysAndValueNames, "VMware")
 	modules.InstallNetworkInterfaces(Config.VMware.NetworkInterfaces, "VMware")
+	
 	utils.PrintIfEnoughLevel("=====> Hyper-V <=====\n", utils.BASIC_INFORMATION_MESSAGE)
 	modules.InstallNetworkInterfaces(Config.HyperV.NetworkInterfaces, "Hyper-V")
+	
 	utils.PrintIfEnoughLevel("=====> Parallels <=====\n", utils.BASIC_INFORMATION_MESSAGE)
 	modules.InstallNetworkInterfaces(Config.Parallels.NetworkInterfaces, "Parallels")
+	
 	utils.PrintIfEnoughLevel("=====> FakeProgramSpawner service <=====\n", utils.BASIC_INFORMATION_MESSAGE)
 	all_processes := utils.JoinAllProgramNames(Config)
 	if len(all_processes) == 0 {

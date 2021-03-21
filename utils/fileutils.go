@@ -77,8 +77,7 @@ func DeleteIfIsNaAVFile(file string, printPrepend string) (bool, error) {
 		fmt.Printf("%s [!] ER-FU007 Error removing file %s, %s\n", printPrepend, file, err)
 		return false, err
 	} else {
-		fmt.Printf("%s Skipping file %s, not NaAV file\n", printPrepend, file)
-		return true, nil
+		return false, errors.New("not NaAV file")
 	}
 }
 

@@ -13,12 +13,13 @@ func InstallRegkeys(regkeys map[string][]string, VerbosePlatformName string) {
 	}
 	utils.PrintIfEnoughLevel(fmt.Sprintf("Creating %s Registry Keys & ValueNames \n", VerbosePlatformName), utils.SUMMARY_MESSAGE)
 	okOperations := 0
-	NokOperations := 0
+	NoOKperations := 0
+	SkippedOperations :=0
 	for key, value := range regkeys {
 		k, err := utils.CreateRetrieveRegKey(key)
 		if err != nil {
 			utils.PrintIfEnoughLevel(fmt.Sprintf("%s [!] FR-RU001 can't create/retrieve registry key %s ,%s \n", "\t", key, err), utils.OPERATION_ERROR_MESSAGE)
-			NokOperations++
+			NoOKperations++
 			continue
 		}
 		okOperations++
@@ -28,17 +29,18 @@ func InstallRegkeys(regkeys map[string][]string, VerbosePlatformName string) {
 				err = utils.WriteValue(k, v)
 				if err != nil {
 					utils.PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-FR002 can't create registry namevalue %s  on registry key %s ,%s \n", "\t", v, key, err), utils.OPERATION_ERROR_MESSAGE)
-					NokOperations++
+					NoOKperations++
 					continue
 				}
 				utils.PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully created %s on registry key %s \n", "\t", v, key), utils.OPERATION_SUCCESS_MESSAGE)
 			} else {
 				utils.PrintIfEnoughLevel(fmt.Sprintf("%s [i] Skipping namevalue %s on registry key %s, variable already exits \n", "\t", v, key), utils.OPERATION_SKIPPED_MESSAGE)
+				SkippedOperations++
 			}
 			okOperations++
 		}
 	}
-	utils.PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully performed %d of %d operations\n", "\t", okOperations, okOperations+NokOperations), utils.SUMMARY_MESSAGE)
+	utils.PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully performed %d of %d operations (%d skipped)\n", "\t", okOperations, okOperations+NoOKperations+SkippedOperations,SkippedOperations), utils.SUMMARY_MESSAGE)
 }
 
 func UninstallRegkeys(regkeys map[string][]string, VerbosePlatformName string) {
@@ -48,12 +50,13 @@ func UninstallRegkeys(regkeys map[string][]string, VerbosePlatformName string) {
 	}
 	utils.PrintIfEnoughLevel(fmt.Sprintf("Removing %s Registry Keys & ValueNames \n", VerbosePlatformName), utils.BASIC_INFORMATION_MESSAGE)
 	okOperations := 0
-	NokOperations := 0
+	NoOKperations := 0
+	SkippedOperations := 0
 	for key, value := range regkeys {
 		exists := utils.ExistsRegKey(key)
 		if !exists {
 			utils.PrintIfEnoughLevel(fmt.Sprintf("%s Skipping registry key %s & it's namevalues, not found \n", "\t", key), utils.OPERATION_SKIPPED_MESSAGE)
-			okOperations = okOperations + 1 + len(value)
+			SkippedOperations = SkippedOperations + 1 + len(value)
 			continue
 		}
 		k, err := utils.CreateRetrieveRegKey(key)
@@ -67,13 +70,13 @@ func UninstallRegkeys(regkeys map[string][]string, VerbosePlatformName string) {
 				valuecontent := utils.GetValue(k, v)
 				if valuecontent != "NaAV" {
 					utils.PrintIfEnoughLevel(fmt.Sprintf("%s Skipping value %s on registry key %s, not NaAV value \n", "\t", v, key), utils.OPERATION_SKIPPED_MESSAGE)
-					okOperations++
+					SkippedOperations++
 					continue
 				}
 				err = utils.DeleteValue(k, v)
 				if err != nil {
 					utils.PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-FR004 Unable to delete value %s on registry key %s \n", "\t", v, key), utils.OPERATION_ERROR_MESSAGE)
-					NokOperations++
+					NoOKperations++
 					continue
 				} else {
 					utils.PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully deleted valuename %s on key %s \n", "\t", v, key), utils.SUMMARY_MESSAGE)
@@ -87,13 +90,13 @@ func UninstallRegkeys(regkeys map[string][]string, VerbosePlatformName string) {
 		}
 		if err != nil {
 			utils.PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-FR005 Unable to delete key %s \n", "\t", key), utils.OPERATION_ERROR_MESSAGE)
-			NokOperations++
+			NoOKperations++
 		} else {
 			utils.PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully deleted key %s \n", "\t", key), utils.OPERATION_SUCCESS_MESSAGE)
 			okOperations++
 		}
 	}
-	utils.PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully performed %d of %d operations\n", "\t", okOperations, okOperations+NokOperations), utils.SUMMARY_MESSAGE)
+	utils.PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully performed %d of %d operations (%d skipped)\n", "\t", okOperations, okOperations+NoOKperations+SkippedOperations,SkippedOperations), utils.SUMMARY_MESSAGE)
 }
 
 func CheckRegkeys(regkeys map[string][]string, VerbosePlatformName string) {
@@ -155,6 +158,7 @@ func UninstallParentTrees(trees []string) {
 	}
 	utils.PrintIfEnoughLevel(fmt.Sprintf("%s --- Removing parent trees\n", "\t"), utils.BASIC_INFORMATION_MESSAGE)
 	okOperations := 0
+	SkippedOperations :=0
 	for _, tree := range trees {
 		exists := utils.ExistsRegKey(tree)
 		if exists {
@@ -176,8 +180,8 @@ func UninstallParentTrees(trees []string) {
 			}
 		} else {
 			utils.PrintIfEnoughLevel(fmt.Sprintf("%s [i] Skipped key %s, not found \n", "\t\t", tree), utils.OPERATION_SKIPPED_MESSAGE)
-			okOperations++
+			SkippedOperations++
 		}
 	}
-	utils.PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully performed %d of %d operations\n", "\t\t", okOperations, len(trees)), utils.SUMMARY_MESSAGE)
+	utils.PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully performed %d of %d operations (%d skipped)\n", "\t\t", okOperations, len(trees),SkippedOperations), utils.SUMMARY_MESSAGE)
 }
