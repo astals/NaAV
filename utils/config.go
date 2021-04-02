@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"embed"
 )
 
 type PlatformDataStruct struct {
@@ -25,29 +26,38 @@ type Configuration struct {
 	QEMU          PlatformDataStruct
 	VMware        PlatformDataStruct
 	VirtualBox    PlatformDataStruct
+	Sandboxie 	PlatformDataStruct
 }
 
-func GetConfigfile(ConfigFile string) string {
-	if ConfigFile == "" {
-		ConfigFile = "resources\\defaultconfig.json"
-	}
+
+func LoadConfigFromFile(ConfigFile string) Configuration {
 	ConfigFile, err := FindAbsolutePath(ConfigFile)
 	if err != nil {
 		PrintIfEnoughLevel(fmt.Sprintf("[!] ER-CO001 Unable to find config file, %s \n", err), OPERATION_ERROR_MESSAGE)
 		os.Exit(2)
 	}
-	return ConfigFile
-}
-func ReadConfigFile(ConfigFile string) Configuration {
 	bytesRead, err := ReadFile(ConfigFile)
 	if err != nil {
 		PrintIfEnoughLevel(fmt.Sprintf("[!] ER-CO002 Unable to read config file, %s \n", err), OPERATION_ERROR_MESSAGE)
 		os.Exit(5)
 	}
-	var Config Configuration
-	err = json.Unmarshal(bytesRead, &Config)
+	return LoadConfig(bytesRead)
+}
+
+func LoadConfigFromEmbededFS(ConfigFile embed.FS)Configuration{
+	bytesRead, err := ConfigFile.ReadFile("resources/defaultconfig.json")
 	if err != nil {
 		PrintIfEnoughLevel(fmt.Sprintf("[!] ER-CO003 Unable to read config file, %s \n", err), OPERATION_ERROR_MESSAGE)
+		os.Exit(5)
+	}
+	return LoadConfig(bytesRead)
+}
+
+func LoadConfig(bytesRead []byte) Configuration  {
+	var Config Configuration
+	err := json.Unmarshal(bytesRead, &Config)
+	if err != nil {
+		PrintIfEnoughLevel(fmt.Sprintf("[!] ER-CO004 Unable to read config file, %s \n", err), OPERATION_ERROR_MESSAGE)
 		os.Exit(11)
 	}
 	return Config

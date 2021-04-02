@@ -74,7 +74,7 @@
   },
   "VMware": {
     "Drivers": [
-      "C:\\WINDOWS\\system32\\drivers\\vmmouse.sys.sys",
+      "C:\\WINDOWS\\system32\\drivers\\vmmouse.sys",
       "C:\\WINDOWS\\system32\\drivers\\vmhgfs.sys",
       "C:\\WINDOWS\\system32\\drivers\\vmrawdsk.sys",
       "C:\\WINDOWS\\system32\\drivers\\vmmemctl.sys",
@@ -531,7 +531,6 @@
       "C:\\Program Files\\Sandboxie\\32\\SbieDll.dll",
       "C:\\Program Files\\Sandboxie\\32\\SbieSvc.exe"],
     "NetworkInterfaces": {
-      "NaAV HyperV 1": "00:15:5d:e1:ee:e7"
     },
     "Processes": ["SbieSvc.exe"]
   }

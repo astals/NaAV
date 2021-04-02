@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net"
 	"os/exec"
+	"strings"
 )
 
 /* requisites:
@@ -54,14 +55,16 @@ func DeleteNetworkAdapter(name string, printPrepend string) error {
 	return nil
 }
 
-func ExistsNetworkAdapter(mac string, printPrepend string) bool {
+func ExistsNetworkAdapterStatingWith(mac string, printPrepend string) bool {
 	addresses, err := GetMacAddresses()
 	if err != nil {
 		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-NU004 Error getting mac addresses: %s\n", printPrepend, err), OPERATION_ERROR_MESSAGE)
 		return false
 	}
-	if ElementInStringArray(mac, addresses) {
-		return true
+	for _, item :=range addresses{
+		if strings.HasPrefix(item, mac){
+			return true
+		}
 	}
 	return false
 }

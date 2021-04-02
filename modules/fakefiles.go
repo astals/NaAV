@@ -2,7 +2,6 @@ package modules
 
 import (
 	"fmt"
-
 	"../utils"
 )
 
@@ -14,13 +13,13 @@ func InstallFiles(Files []string, VerboseFileTypeName string, VerbosePlatformNam
 	utils.PrintIfEnoughLevel(fmt.Sprintf("Creating %s %s:\n", VerbosePlatformName, VerboseFileTypeName), utils.BASIC_INFORMATION_MESSAGE)
 	okOperations := 0
 	SkippedOperations :=0
-	for _, file := range Files {
-		exists, _ := utils.FileExists(file)
+	for _, destination := range Files {
+		exists, _ := utils.FileExists(destination)
 		if exists{
-			utils.PrintIfEnoughLevel(fmt.Sprintf("%s Skipping file %s\n", "/t", file), utils.OPERATION_SKIPPED_MESSAGE)
+			utils.PrintIfEnoughLevel(fmt.Sprintf("%s Skipping file %s\n", "\t", destination), utils.OPERATION_SKIPPED_MESSAGE)
 			SkippedOperations++
 		}
-		err := utils.SafeCopy("resources\\dummyfile", file, "\t")
+		err :=utils.SafeDump([]byte("NaAV"), destination, "\t")
 		if err == nil {
 			okOperations++
 		}

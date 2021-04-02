@@ -43,7 +43,7 @@ func InstallFakeProgramService() {
 }
 
 func UninstallFakeProgramService() {
-	config := utils.ReadConfigFile("C:\\Program Files (x86)\\NaAV\\config.json")
+	config := utils.LoadConfigFromFile("C:\\Program Files (x86)\\NaAV\\config.json")
 	all_processes := utils.JoinAllProgramNames(config)
 	if len(all_processes) == 0 {
 		utils.PrintIfEnoughLevel("Skipped uninstall of NaAVFakeProgramSpawner service: 0 processes found\n", utils.OPERATION_SKIPPED_MESSAGE)
@@ -74,7 +74,7 @@ func UninstallFakeProgramService() {
 }
 
 func CheckPrograms(processes []string, VerbosePlatformName string) {
-	utils.PrintIfEnoughLevel(fmt.Sprintf("Checking %s processes\n", VerbosePlatformName), utils.BASIC_INFORMATION_MESSAGE)
+	utils.PrintIfEnoughLevel(fmt.Sprintf("Checking %s processes:\n", VerbosePlatformName), utils.BASIC_INFORMATION_MESSAGE)
 	var runningProcessesNames []string
 	runningProcesses, err := GetRunningProcesses()
 	if err != nil {

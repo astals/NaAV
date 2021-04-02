@@ -41,6 +41,29 @@ func SafeCopy(origin string, destination string, printPrepend string) error {
 	}
 	return nil
 }
+func SafeDump(bytedata []byte, destination string, printPrepend string) error {
+	split := strings.Split(destination, "\\")
+	path := strings.Join(split[:len(split)-1], "\\")
+	err := CreateFoldersPath(path)
+	if err != nil {
+		fmt.Printf("%s [!] ER-FU000 %s ,%s \n", printPrepend, path, err)
+	}
+	exists, err := FileExists(destination)
+	if err != nil && !os.IsNotExist(err) {
+		fmt.Printf("%s [!] ER-FU003 Skyping file %s, %s \n", printPrepend, destination, err)
+		return err
+	}
+	if exists {
+		fmt.Printf("%s ER-FU004 Skyping file %s, file already exists \n", printPrepend, destination)
+		return nil
+	}
+	err = ioutil.WriteFile(destination,bytedata,0600)
+	if err != nil {
+		fmt.Printf("%s [!] ER-FU005 Error dumping file %s, %s \n", printPrepend, destination, err)
+		return err
+	}
+	return nil
+}
 
 func CopyFile(origin string, destination string) error {
 	bytesRead, err := ioutil.ReadFile(origin)
@@ -65,7 +88,7 @@ func ReadFile(file string) ([]byte, error) {
 
 func DeleteIfIsNaAVFile(file string, printPrepend string) (bool, error) {
 	data, err := ReadFile(file)
-	if err == nil && string(data) == "NaAV" {
+	if err == nil && (string(data) == "NaAV" || string(data) == "") {
 		err := os.Remove(file)
 		if err == nil {
 			return true, nil

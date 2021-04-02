@@ -16,7 +16,7 @@ type RAMDimm struct {
 	Speed        int
 	Voltage      int
 }
-type HardDrive struct {
+type StorageDevice struct {
 	Manufacturer string
 	Model        string
 	SerialNumber string
@@ -92,8 +92,8 @@ type SystemInfo struct {
 		Product      string
 		OnBoardDevices []OnBoardDevice
 	}
-	TotalDrivesGB int
-	HardDrives    []HardDrive
+	TotalStorageGB int
+	StorageDevices    []StorageDevice
 	CPUs          []CPU
 	GPUs          []GPU
 	Monitors      []struct {
@@ -121,7 +121,7 @@ type SystemInfo struct {
 func AppendIfSignificantlyPopulated(original string, printarray []string)string{
 	str :=""
 	for _, element := range printarray{
-			if ElementInStringArray(element, []string{"", " ", "Unknown","(Standard disk drives)","(Standard system devices)","Default string"}){
+			if ElementInStringArray(element, []string{"Unknown","INVALID","(Standard disk drives)","(Standard system devices)","Default string","","\t","\t\t"," ","  ","   ","    ","     ","      ","       "}){
 				return original
 			}
 			str = str + element			
@@ -131,7 +131,11 @@ func AppendIfSignificantlyPopulated(original string, printarray []string)string{
 
 func PrintHardwareInfo(systemInfo *SystemInfo) {
 	// RAM //
-	PrintIfEnoughLevelAndPropulated(AppendIfSignificantlyPopulated("", []string{"TotalRAM: ", strconv.Itoa(systemInfo.TotalRamGB)," GB\n"}),HARDWARE_RECOGNITION_MESSAGE)
+	if systemInfo.TotalRamGB !=0{
+		PrintIfEnoughLevelAndPropulated(AppendIfSignificantlyPopulated("", []string{"TotalRAM: ", strconv.Itoa(systemInfo.TotalRamGB)," GB\n"}),HARDWARE_RECOGNITION_MESSAGE)
+	}else{
+		PrintIfEnoughLevelAndPropulated(AppendIfSignificantlyPopulated("", []string{"TotalRAM: ", strconv.Itoa(systemInfo.TotalRamGB)," GB -> OK, if Win32_PhysicalMemory returned nothing, this is a VM \n"}),HARDWARE_RECOGNITION_MESSAGE)
+	}
 	for i, tmp := range systemInfo.RAM{
 		str := fmt.Sprintf("\tDimm %d -> ", i+1)
 		str = AppendIfSignificantlyPopulated(str,[]string{"Manufacturer: ", tmp.Manufacturer, ", "})
@@ -143,9 +147,9 @@ func PrintHardwareInfo(systemInfo *SystemInfo) {
 		PrintIfEnoughLevel(fmt.Sprintf("%s \n",strings.Trim(str,", ")), HARDWARE_RECOGNITION_MESSAGE)
 	}
 	// STORAGE //
-	PrintIfEnoughLevelAndPropulated(AppendIfSignificantlyPopulated("", []string{"Total HardDrive Storage: ", strconv.Itoa(systemInfo.TotalDrivesGB)," GB\n"}),HARDWARE_RECOGNITION_MESSAGE)
-	for i, tmp := range systemInfo.HardDrives{
-		str := fmt.Sprintf("\tHDD %d -> ", i+1)
+	PrintIfEnoughLevelAndPropulated(AppendIfSignificantlyPopulated("", []string{"Total Storage: ", strconv.Itoa(systemInfo.TotalStorageGB)," GB\n"}),HARDWARE_RECOGNITION_MESSAGE)
+	for i, tmp := range systemInfo.StorageDevices{
+		str := fmt.Sprintf("\tDevice %d -> ", i+1)
 		str = AppendIfSignificantlyPopulated(str,[]string{"Manufacturer: ", tmp.Manufacturer, ", "})
 		str = AppendIfSignificantlyPopulated(str,[]string{"Model: ", tmp.Model, ", "})
 		str = AppendIfSignificantlyPopulated(str,[]string{"Size: ", strconv.Itoa(tmp.Size)," GB, "})
@@ -364,7 +368,7 @@ func PopulateGPUs(systemInfo *SystemInfo) {
 }
 
 
-func PopulateHardDrivesInfo(systemInfo *SystemInfo) {
+func PopulateStorageInfo(systemInfo *SystemInfo) {
 	type Win32_DiskDrive struct {
 		Manufacturer string
 		Model        string
@@ -379,17 +383,17 @@ func PopulateHardDrivesInfo(systemInfo *SystemInfo) {
 	if err != nil {
 		PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-HU006 Error querying WMI: %s\n", "", err), OPERATION_ERROR_MESSAGE)
 	}
-	systemInfo.TotalDrivesGB = 0
+	systemInfo.TotalStorageGB = 0
 	for _, element := range dst {
-		var tmp HardDrive
+		var tmp StorageDevice
 		tmp.Size = int(element.Size) / 1073741824
 		tmp.Manufacturer = element.Manufacturer
 		tmp.Model = element.Model
 		tmp.SerialNumber = strings.Trim(element.SerialNumber," ")
 		tmp.Firmware = element.FirmwareRevision
 		tmp.Partitions = int(element.Partitions)
-		systemInfo.TotalDrivesGB += tmp.Size
-		systemInfo.HardDrives = append(systemInfo.HardDrives, tmp)
+		systemInfo.TotalStorageGB += tmp.Size
+		systemInfo.StorageDevices = append(systemInfo.StorageDevices, tmp)
 	}
 
 }

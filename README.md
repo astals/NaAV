@@ -101,5 +101,11 @@ naav.exe -v[X] -> Verbosity level (example: naav.exe --check -v2)
 |Functionality | Status | Version | 
 |:-------------|:-------------:|:-------------:|
 | Output in Json format| Backlog | x.x |
-| Hardware Recognition Hoks | Backlog | x.x |
+| Hardware recognition hooks | Backlog | x.x |
 | Central management server | Backlog | x.x |
+
+|Task | Status |  
+|:-------------|:-------------: |
+| Add more emulated systems | WIP |
+| Add more items to currently emulated systems | WIP |
+| Community config files repository | Not scheduled |

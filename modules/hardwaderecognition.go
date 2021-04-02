@@ -12,6 +12,12 @@ github.com/go-ole/go-ole
 https://underc0de.org/foro/visual-studio-net/(vb-net)-anti-virtual-machine/
 https://docs.microsoft.com/en-us/windows/win32/wmisdk/wmi-providers
 */
+
+/*
+PENDING ADD?
+	CPU Temp
+*/
+
 import (
 	"../utils"
 )
@@ -19,7 +25,7 @@ import (
 func CheckHardware() {
 	var systemInfo utils.SystemInfo
 	utils.PopulateRamInfo(&systemInfo)
-	utils.PopulateHardDrivesInfo(&systemInfo)
+	utils.PopulateStorageInfo(&systemInfo)
 	utils.PopulateHardBIOSInfo(&systemInfo)
 	utils.PopulateMotherBoardInfo(&systemInfo)
 	utils.PopulateCPUsInfo(&systemInfo)

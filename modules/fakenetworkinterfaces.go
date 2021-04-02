@@ -31,7 +31,7 @@ func UninstallNetworkInterfaces(adapters map[string]string, VerbosePlatformName 
 	okOperations := 0
 	SkippedOperations := 0
 	for name, mac := range adapters {
-		if !utils.ExistsNetworkAdapter(mac, "\t") {
+		if !utils.ExistsNetworkAdapterStatingWith(mac, "\t") {
 			SkippedOperations++
 			continue
 		}
@@ -51,7 +51,7 @@ func CheckNetworkInterfaces(adapters map[string]string, VerbosePlatformName stri
 	utils.PrintIfEnoughLevel(fmt.Sprintf("Checking %s network interfaces:\n", VerbosePlatformName), utils.BASIC_INFORMATION_MESSAGE)
 	detected := 0
 	for _, mac := range adapters {
-		if utils.ExistsNetworkAdapter(mac, "\t") {
+		if utils.ExistsNetworkAdapterStatingWith(mac[0:8], "\t") {
 			detected++
 		}
 	}

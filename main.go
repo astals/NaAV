@@ -3,14 +3,18 @@ package main
 import (
 	"fmt"
 	"os"
-
+	"embed"
 	"./modes"
 	"./utils"
 )
+//go:embed resources/*
+var resources embed.FS
 
 var NaAVVersion = "0.1"
 
 func main() {
+	c := resources
+	_ = c
 	// TODO: create uninstall $het (control panel)
 	args := os.Args
 	if len(args) == 1 || args[1] == "-h" || args[1] == "--help" {
@@ -34,15 +38,23 @@ func main() {
 			return
 		}*/
 	}
-	ConfigFile := utils.GetConfigfile("")
+	configFile := ""
+	var Config utils.Configuration
+	if configFile == ""{
+		Config = utils.LoadConfigFromEmbededFS(resources)
+	}else{
+		Config = utils.LoadConfigFromFile(configFile)
+	}
+
 	if args[1] == "--check" {
-		modes.Check(ConfigFile)
+		modes.Check(Config)
 	}
 	if args[1] == "--uninstall" {
-		modes.Uninstall(ConfigFile)
+		modes.Uninstall(Config)
 	}
 	if args[1] == "--install" {
-		modes.Install(ConfigFile)
+		modes.CloneInstallFiles(configFile,resources)
+		modes.Install(Config)
 	}
 	if args[1] != "-v" && args[1] != "--version" && args[1] != "-h" && args[1] != "--help" && args[1] != "--check" && args[1] != "--uninstall" && args[1] != "--install" {
 		fmt.Printf("Invalid option \n")

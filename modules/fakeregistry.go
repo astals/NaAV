@@ -79,7 +79,7 @@ func UninstallRegkeys(regkeys map[string][]string, VerbosePlatformName string) {
 					NoOKperations++
 					continue
 				} else {
-					utils.PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully deleted valuename %s on key %s \n", "\t", v, key), utils.SUMMARY_MESSAGE)
+					utils.PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully deleted valuename %s on key %s \n", "\t", v, key), utils.OPERATION_SUCCESS_MESSAGE)
 					okOperations++
 				}
 			}
@@ -89,7 +89,7 @@ func UninstallRegkeys(regkeys map[string][]string, VerbosePlatformName string) {
 			err = utils.DeleteKey(key)
 		}
 		if err != nil {
-			utils.PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-FR005 Unable to delete key %s \n", "\t", key), utils.OPERATION_ERROR_MESSAGE)
+			utils.PrintIfEnoughLevel(fmt.Sprintf("%s [!] ER-FR005 Unable to delete key %s: %s  \n", "\t", key, err), utils.OPERATION_ERROR_MESSAGE)
 			NoOKperations++
 		} else {
 			utils.PrintIfEnoughLevel(fmt.Sprintf("%s [i] Successfully deleted key %s \n", "\t", key), utils.OPERATION_SUCCESS_MESSAGE)
